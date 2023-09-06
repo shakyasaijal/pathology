@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Breast Cancer Pathology | Find a doctor">
 	<meta name="author" content="Saijal, Roisha, Aayush, Ruby">
-	<title>Breast Cancer Pathology</title>
+	<title>Breast Cancer Pathology <?php if($data['title']) echo '|' . $data['title']; ?></title>
 	<!-- Favicons-->
 	<link rel="shortcut icon" href="{% static 'frontend/img/favicon.ico'%}" type="image/x-icon">
 	<link rel="apple-touch-icon" type="image/x-icon" href="{% static 'frontend/img/apple-touch-icon-57x57-precomposed.png' %}">
