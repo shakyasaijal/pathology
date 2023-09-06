@@ -11,7 +11,6 @@ class User extends Core\Model
     public $id;
     
     public function getAllUser(){
-        print_r($this->db->row('SELECT * from users'));
         return $this->db->row('SELECT * from users');
     }
 }
