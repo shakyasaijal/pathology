@@ -1,20 +1,9 @@
-Options Indexes FollowSymLinks MultiViews
+Options -MultiViews
 RewriteEngine On
 
-RewriteBase /php/public
+RewriteBase /pathology/public
+
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 
-RewriteRule ^(.+)$ index.php?url=$1 [QSA,L] Options -Indexes
-
-
-# OLD
-# Options -MultiViews
-# RewriteEngine On
-
-# RewriteBase /project/public
-
-# RewriteCond %{REQUEST_FILENAME} !-d
-# RewriteCond %{REQUEST_FILENAME} !-f
-
-# RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
