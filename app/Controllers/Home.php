@@ -9,7 +9,6 @@ class Home extends Controller
 {
     public function index($name = [])
     {
-        $user = $this->model('User')->getAllUser();
-        $this->view('home/index',['name' => $user, 'title' => 'Home']);
+    $this->view('home/index',['title' => 'Home']);
     }
 }

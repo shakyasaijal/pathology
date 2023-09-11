@@ -9,7 +9,7 @@ class DB {
 	private $stmt;
 
     public function __construct(){
-		$this->db = new PDO('mysql:host=localhost;dbname=pathology', 'root', 'Apple#123');
+		$this->db = new PDO('mysql:host=localhost;dbname=pathology', 'root', '');
     }
 
     public function query($sql, $params = []) {
@@ -37,7 +37,7 @@ class DB {
 
 	//Return a specific row as an object
 	public function single() {
-		$this->execute();
+		// $this->execute();
 		return $this->statement->fetch(PDO::FETCH_OBJ);
 	}
 

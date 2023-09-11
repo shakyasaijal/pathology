@@ -14,21 +14,24 @@ class User extends Core\Model
         return $this->db->row('SELECT * from users');
     }
 
-    public function login($username, $password) {
-        $this->db->query('SELECT * FROM users WHERE username = :username');
+    public function login($email, $password) {
+        $this->db->query('SELECT * FROM users WHERE email = :email');
 
         //Bind value
-        $this->db->bind(':username', $username);
-
+        $this->db->bind(':email', $email);
+        $exec = $this->db->execute();
         $row = $this->db->single();
-
-        $hashedPassword = password_hash($row->password, PASSWORD_DEFAULT);
-
-        if (password_verify($password, $hashedPassword)) {
-            return $row;
-        } else {
+        if ($row){
+            $hashedPassword = $row->password;
+            if (password_verify($password, $hashedPassword)) {
+                return $row;
+            } else {
+                return false;
+            }    
+        }else{
             return false;
         }
+        
     }
 
     public function register($data) {

@@ -4,7 +4,7 @@
     <input type="hidden" name="type" value="login">
         <input type="text" name="email"  
         placeholder="Username/Email...">
-        <?php echo $data['usernameError']; ?>
+        <?php echo $data['emailError']; ?>
         <input type="password" name="password" 
         placeholder="Password...">
         <?php echo $data['passwordError']; ?>

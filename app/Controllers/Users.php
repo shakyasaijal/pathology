@@ -25,9 +25,9 @@ class Users extends Controller
     public function user_login() {
         $data = [
             'title' => 'Login',
-            'username' => '',
+            'email' => '',
             'password' => '',
-            'usernameError' => '',
+            'emailError' => '',
             'passwordError' => ''
         ];
 
@@ -37,15 +37,16 @@ class Users extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'username' => trim($_POST['email']),
+                'title' => 'Login',
+                'email' => trim($_POST['email']),
                 'password' => trim($_POST['password']),
-                'usernameError' => '',
+                'emailError' => '',
                 'passwordError' => '',
             ];
 
             //Validate username
-            if (empty($data['username'])) {
-                $data['usernameError'] = 'Please enter a username.';
+            if (empty($data['email'])) {
+                $data['emailError'] = 'Please enter a username.';
             }
 
             //Validate password
@@ -54,18 +55,19 @@ class Users extends Controller
             }
 
             //Check if all errors are empty
-            if (empty($data['usernameError']) && empty($data['passwordError'])) {
-                $loggedInUser = $this->userModel->login($data['username'], $data['password']);
-
-                echo $loggedInUser;
-                // if ($loggedInUser) {
-                //     $this->createUserSession($loggedInUser);
-                // } else {
-                //     $data['passwordError'] = 'Password or username is incorrect. Please try again.';
-
-                //     $this->view('authentication/login', $data);
-                // }
-
+            if (empty($data['emailError']) && empty($data['passwordError'])) {
+                // Check iff email exists
+                if (!$this->userModel->findUserByEmail($data['email'])) {
+                    $data['emailError'] = "The email address you entered isn't connected to an account.";
+                }else{
+                    $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+                    if(!$loggedInUser){
+                        $data['passwordError'] = "Authentication Failed.";
+                    }else{
+                        $this->createUserSession($loggedInUser);
+                    }
+                }
+                
         $this->view('authentication/login', $data);
     }
 
@@ -174,5 +176,11 @@ class Users extends Controller
             }
         }
         $this->view('authentication/register', $data);
+    }
+
+    public function createUserSession($user) {
+        $_SESSION['user_id'] = $user->id;
+        $_SESSION['email'] = $user->email;
+        header('location: /pathology/');
     }
 }
