@@ -99,6 +99,7 @@ class Users extends Controller
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
               $data = [
+                'title' => 'Register',
                 'first_name' => trim($_POST['first_name']),
                 'last_name' => trim($_POST['last_name']),
                 'email' => trim($_POST['email']),
@@ -172,7 +173,6 @@ class Users extends Controller
                 }
             }
         }
-
         $this->view('authentication/register', $data);
     }
 }
