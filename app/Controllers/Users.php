@@ -67,11 +67,13 @@ class Users extends Controller
 
             //Validate username
             if (empty($data['email'])) {
+                $_SESSION['ERRORS']['emailError'] = 'Please enter a valid email.';
                 $data['emailError'] = 'Please enter a username.';
             }
 
             //Validate password
             if (empty($data['password'])) {
+                $_SESSION['ERRORS']['passwordError'] = 'Please enter a password.';
                 $data['passwordError'] = 'Please enter a password.';
             }
 
@@ -80,10 +82,18 @@ class Users extends Controller
                 // Check if email exists
 
                 if (!$this->userModel->findUserByEmail($data['email'])) {
+                    $_SESSION['ERRORS']['emailError'] = "The email address you entered isn't connected to an account.";
                     $data['emailError'] = "The email address you entered isn't connected to an account.";
                 }else{
                     $loggedInUser = $this->userModel->login($data['email'], $data['password']);
-                    if(!$loggedInUser){
+
+                    if(gettype($loggedInUser) == 'boolean'){
+                        $_SESSION['ERRORS']['passwordError'] = 'Authentication Failed.';
+                        $data['passwordError'] = "Authentication Failed.";
+                        error_log('khoy');
+                    }
+                    else if(!$loggedInUser->email){
+                        $_SESSION['ERRORS']['passwordError'] = 'Authentication Failed.';
                         $data['passwordError'] = "Authentication Failed.";
                     }else{
                         $this->createUserSession($loggedInUser);
@@ -109,6 +119,8 @@ class Users extends Controller
                             $hashedToken = password_hash($token, PASSWORD_DEFAULT);
                             $this->userModel->createAuthToken($data['email'], $selector, $hashedToken, date('Y-m-d\TH:i:s', time() + 864000));
                         }
+                        $_SESSION['alert_success'] = 'Login Successful.';
+
                         if ($data['is_admin'] == 'admin'){
                             header('location: /pathology/admin/index');
                             exit();
@@ -119,7 +131,7 @@ class Users extends Controller
                     }
                 }
                 
-        $this->view('authentication/login', $data);
+            $this->view('authentication/login', $data);
     }
 
         } else {
@@ -129,6 +141,10 @@ class Users extends Controller
                 'usernameError' => '',
                 'passwordError' => ''
             ];
+        }
+        if ($data['is_admin'] == 'admin'){
+            header('location: /pathology/admin/login');
+            exit();
         }
         $this->view('authentication/login', $data);
     }

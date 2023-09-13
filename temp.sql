@@ -10,12 +10,13 @@
 --   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 -- )
 
-CREATE TABLE `auth_tokens` (
-  `id` int AUTO_INCREMENT PRIMARY KEY,
-  `user_email` varchar(255) NOT NULL,
-  `auth_type` varchar(255) NOT NULL,
-  `selector` text NOT NULL,
-  `token` longtext NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `expires_at` timestamp NULL DEFAULT NULL
-)
+-- CREATE TABLE `auth_tokens` (
+--   `id` int AUTO_INCREMENT PRIMARY KEY,
+--   `user_email` varchar(255) NOT NULL,
+--   `auth_type` varchar(255) NOT NULL,
+--   `selector` text NOT NULL,
+--   `token` longtext NOT NULL,
+--   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+--   `expires_at` timestamp NULL DEFAULT NULL
+-- )
+

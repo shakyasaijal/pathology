@@ -12,10 +12,22 @@ check_logged_out();
     <input type="hidden" name="type" value="login">
         <input type="text" name="email"  
         placeholder="Username/Email...">
-        <?php echo $data['emailError']; ?>
+        <?php print_r($_SESSION['ERRORS'])?>
+        <?php 
+            if(isset($_SESSION['ERRORS']['emailError'])) 
+            {
+                echo $_SESSION['ERRORS']['emailError']; 
+                unset($_SESSION['ERRORS']); 
+            }        
+        ?>
         <input type="password" name="password" 
         placeholder="Password...">
-        <?php echo $data['passwordError']; ?>
+        <?php 
+            if(isset($_SESSION['ERRORS']['passwordError'])) {
+                echo $_SESSION['ERRORS']['passwordError']; 
+                unset($_SESSION['ERRORS']); 
+            }
+        ?>
         <input type="checkbox" class="custom-control-input" id="rememberme" name="rememberme">Remember Me
         <input type="hidden" name="login_by" value="admin"/>
         <button type="submit" name="submit" value="loginsubmit" name="loginsubmit">Log In</button>

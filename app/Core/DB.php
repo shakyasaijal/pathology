@@ -27,12 +27,11 @@ class DB {
 		// $this->stmt->execute();
 		// return $this->stmt;
 		$this->statement = $this->db->prepare($sql);
-
 	}
 
-    public function row($sql, $params = []) {
-		$result = $this->query($sql, $params);
-		return $result->fetchAll(PDO::FETCH_ASSOC);
+    public function row() {
+		$this->execute();
+		return $this->statement->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	//Return a specific row as an object
