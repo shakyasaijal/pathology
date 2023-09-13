@@ -17,6 +17,6 @@ check_logged_out();
         placeholder="Password...">
         <?php echo $data['passwordError']; ?>
         <input type="checkbox" class="custom-control-input" id="rememberme" name="rememberme">Remember Me
-        
+        <input type="hidden" name="login_by" value="admin"/>
         <button type="submit" name="submit" value="loginsubmit" name="loginsubmit">Log In</button>
     </form>

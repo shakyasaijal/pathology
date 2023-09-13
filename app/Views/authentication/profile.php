@@ -1,6 +1,5 @@
 This is profile
 <?php
-
-session_start();
+include('../app/Views/base/header.php');
 
 ?>

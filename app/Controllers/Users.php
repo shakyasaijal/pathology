@@ -56,11 +56,11 @@ class Users extends Controller
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             //Sanitize post data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
             $data = [
                 'title' => 'Login',
                 'email' => trim($_POST['email']),
                 'password' => trim($_POST['password']),
+                'is_admin' => trim($_POST['login_by']),
                 'emailError' => '',
                 'passwordError' => '',
             ];
@@ -109,7 +109,13 @@ class Users extends Controller
                             $hashedToken = password_hash($token, PASSWORD_DEFAULT);
                             $this->userModel->createAuthToken($data['email'], $selector, $hashedToken, date('Y-m-d\TH:i:s', time() + 864000));
                         }
-                        header('location: /pathology/');
+                        if ($data['is_admin'] == 'admin'){
+                            header('location: /pathology/admin/index');
+                            exit();
+                        }else{
+                            header('location: /pathology/users/profile');
+                            exit();
+                        }
                     }
                 }
                 

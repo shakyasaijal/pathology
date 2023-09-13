@@ -16,11 +16,11 @@ class Admin extends Controller
             'title' => 'Admin',
         ];
         if (check_logged_in() && check_is_admin()){
-            echo 'logged in';
+            $this->view('admin/index', $data);
         }else{
-            echo 'logged out';
+            header('location: /pathology/');
+            exit();
         }
-        $this->view('admin/index', $data);
     }
 
     public function login(){
