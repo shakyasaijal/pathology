@@ -227,6 +227,7 @@ class Users extends Controller
         $_SESSION['verified'] = $user->is_verified;
         $_SESSION['user_id'] = $user->user_id;
         $_SESSION['email'] = $user->email;
+        $_SESSION['is_admin'] = $user->is_admin;
         if($user->is_verified){
             $_SESSION['auth'] = 'verified';
         } else{

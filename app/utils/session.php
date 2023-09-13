@@ -73,13 +73,20 @@
     }
 
     function check_logged_in() {
-        print_r($_SESSION);
         if (isset($_SESSION['auth'])){
             return true;
         }
         else {
             // header("Location: /pathology/users/login/");
             // exit();
+            return false;
+        }
+    }
+
+    function check_is_admin(){
+        if($_SESSION['is_admin'] == 1){
+            return true;
+        }else{
             return false;
         }
     }
