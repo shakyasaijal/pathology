@@ -23,6 +23,27 @@ class Users extends Controller
     }
 
     public function user_login() {
+        /*
+        * -------------------------------------------------------------------------------
+        *   Securing against Header Injection
+        * -------------------------------------------------------------------------------
+        */
+
+        foreach($_POST as $key => $value){
+            $_POST[$key] = _cleaninjections(trim($value));
+        }
+
+        /*
+        * -------------------------------------------------------------------------------
+        *   Verifying CSRF token
+        * -------------------------------------------------------------------------------
+        */
+
+        if (!verify_csrf_token()){
+            $_SESSION['STATUS']['loginstatus'] = 'Request could not be validated';
+            header("Location: /pathology/users/login");
+            exit();
+        }
         $data = [
             'title' => 'Login',
             'email' => '',
@@ -56,7 +77,8 @@ class Users extends Controller
 
             //Check if all errors are empty
             if (empty($data['emailError']) && empty($data['passwordError'])) {
-                // Check iff email exists
+                // Check if email exists
+
                 if (!$this->userModel->findUserByEmail($data['email'])) {
                     $data['emailError'] = "The email address you entered isn't connected to an account.";
                 }else{
@@ -65,6 +87,29 @@ class Users extends Controller
                         $data['passwordError'] = "Authentication Failed.";
                     }else{
                         $this->createUserSession($loggedInUser);
+                        if (isset($_POST['rememberme'])){
+
+                            $selector = bin2hex(random_bytes(8));
+                            $token = random_bytes(32);
+                            
+                            // Remove old authentication token
+                            $this->userModel->removeAuthToken($data['email']);
+    
+                            setcookie(
+                                'rememberme',
+                                $selector.':'.bin2hex($token),
+                                time() + 864000,
+                                '/pathology',
+                                '/pathology',
+                                false, // TLS-only
+                                true  // http-only
+                            );
+    
+                            // Create authentication token
+                            $hashedToken = password_hash($token, PASSWORD_DEFAULT);
+                            $this->userModel->createAuthToken($data['email'], $selector, $hashedToken, date('Y-m-d\TH:i:s', time() + 864000));
+                        }
+                        header('location: /pathology/');
                     }
                 }
                 
@@ -95,10 +140,10 @@ class Users extends Controller
             'confirmPasswordError' => ''
         ];
 
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        // Process form
-        // Sanitize POST data
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Process form
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
               $data = [
                 'title' => 'Register',
@@ -179,8 +224,48 @@ class Users extends Controller
     }
 
     public function createUserSession($user) {
-        $_SESSION['user_id'] = $user->id;
+        $_SESSION['verified'] = $user->is_verified;
+        $_SESSION['user_id'] = $user->user_id;
         $_SESSION['email'] = $user->email;
+        if($user->is_verified){
+            $_SESSION['auth'] = 'verified';
+        } else{
+            $_SESSION['auth'] = 'loggedin';
+        }
+    }
+
+    public function profile(){
+        $data = [
+            'title' => 'Profile',
+        ];
+        if(!check_logged_in()){
+            header('location: /pathology/users/login');
+            exit();
+        }
+        $this->view('authentication/profile', $data);
+    }
+
+    public function logout(){
+        if (check_logged_in()){
+            if(isset($_COOKIE[session_name()])){
+
+                setcookie(session_name(), '', time()-7000000, '/');
+            }
+            
+            if(isset($_COOKIE['rememberme'])) {
+            
+                setcookie('rememberme', '', time()-7000000, '/');
+                $this->userModel->removeAuthToken($_SESSION['email']);
+
+                if (isset($_SESSION['auth'])){
+            
+                    $_SESSION['auth'] = 'verified';
+                }
+            }
+            session_unset();
+            session_destroy();
+        }
         header('location: /pathology/');
+        exit();
     }
 }

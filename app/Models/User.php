@@ -19,7 +19,7 @@ class User extends Core\Model
 
         //Bind value
         $this->db->bind(':email', $email);
-        $exec = $this->db->execute();
+        $this->db->execute();
         $row = $this->db->single();
         if ($row){
             $hashedPassword = $row->password;
@@ -64,5 +64,27 @@ class User extends Core\Model
         } else {
             return false;
         }
+    }
+
+    // Remove user authentication token
+    public function removeAuthToken($email){
+        //Prepared statement
+        $this->db->query("DELETE FROM auth_tokens WHERE user_email=:email AND auth_type='remember_me'");
+        $this->db->bind(':email', $email);
+        $this->db->execute();
+    }
+
+    // Create new authentication token after login
+    public function createAuthToken($email, $selector, $hashedToken, $date){
+        //Prepared statement
+        $this->db->query("INSERT INTO auth_tokens (user_email, auth_type, selector, token, expires_at) 
+        VALUES (:email, 'remember_me', :selector, :token, :expires_at);");
+
+        $this->db->bind(':email', $email);
+        $this->db->bind(':selector', $selector);
+        $this->db->bind(':token', $hashedToken);
+        $this->db->bind(':expires_at', $date);
+        $this->db->execute();
+        error_log($email);
     }
 }
