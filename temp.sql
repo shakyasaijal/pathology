@@ -20,3 +20,8 @@
 --   `expires_at` timestamp NULL DEFAULT NULL
 -- )
 
+CREATE TABLE `about`(
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `info` TEXT NULL,
+    `house_no` 
+)

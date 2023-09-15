@@ -16,22 +16,20 @@ class About extends Core\Model
     }
 
     public function updateAboutData($data){
-        $this->db->query('UPDATE about SET info=:info, house_no=:house_no, street_name:street_name, state=:state,
-        postal_code=:postal_code, city=:city, country=:country, phone=:phone WHERE id=1');
-        
-        echo $data['phone'];
+        $this->db->query('UPDATE about SET info=:info, house_no=:house_no, street_name=:street_name, state=:state,
+        postal_code=:postal_code, city=:city, country=:country, phone=:phone WHERE id=:id');
         
         $this->db->bind(':info', $data['info']);
         $this->db->bind(':house_no', $data['house_no']);
         $this->db->bind(':street_name', $data['street_name']);
         $this->db->bind(':state', $data['state']);
-        $this->db->bind(':postal_code', $data['postal']);
+        $this->db->bind(':postal_code', (int)$data['postal']);
         $this->db->bind(':city', $data['city']);
         $this->db->bind(':country', $data['country']);
-        $this->db->bind(':phone', $data['phone']);
+        $this->db->bind(':phone', (int)$data['phone']);
+        $this->db->bind(':id', 1);
         $row = $this->db->execute();
-        /// this is to be done
-        /// about update not working
+
         if($row){
             return true;
         }else{
