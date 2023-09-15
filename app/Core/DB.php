@@ -9,7 +9,7 @@ class DB {
 	private $stmt;
 
     public function __construct(){
-		$this->db = new PDO('mysql:host=localhost;dbname=pathology', 'root', '');
+		$this->db = new PDO(sprintf('mysql:host=%s;dbname=%s', DB_HOST, DB_NAME), DB_USER, DB_PASSWORD);
     }
 
     public function query($sql, $params = []) {
