@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 12, 2023 at 02:20 AM
+-- Generation Time: Sep 15, 2023 at 11:12 PM
 -- Server version: 8.0.34-0ubuntu0.20.04.1
--- PHP Version: 8.1.22
+-- PHP Version: 8.1.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,6 +34,8 @@ CREATE TABLE `users` (
   `last_name` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `is_verified` tinyint NOT NULL DEFAULT '0',
+  `is_admin` tinyint NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -42,12 +44,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `password`, `created_at`) VALUES
-(1, 'saijal', 'shakya', 'saijal@gmail.com', 'saijalshakya', '2023-09-11 14:27:27'),
-(2, 'roisha', 'ghodi', 'roisha@ghgodi.com', 'asdasd', '2023-09-11 14:42:30'),
-(3, 'Dominique', 'Case', 'xurezeb@mailinator.com', '$2y$10$XLYBDg6QUegAJG7rWk8cE.MHbjezpKQqCyCNSw1UMxV7QASi6Ga96', '2023-09-11 15:17:14'),
-(12, 'Connor', 'Watkins', 'hejufiqi@mailinator.com', '$2y$10$/20swCsjgKjtnXx8gQ3GvepA.9Kx6/fms/NVf.Q0Wt62fhrx1REIq', '2023-09-11 15:26:35'),
-(13, 'Saijal', 'Shakya', 'saijalshakya@gmail.com', '$2y$10$7LgItqszuBbDaoa9iXdUjexxp1gR37qUI9bj1LrJHNCqAWcmui/Xu', '2023-09-11 15:40:15');
+INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `password`, `is_verified`, `is_admin`, `created_at`) VALUES
+(1, 'Hadley', 'Mercado', 'kyce@mailinator.com', '$2y$10$crQ7cPrQJQmrCEW/cj8dh.O6byDv.xKqlcjavVudpuqVbObwVF7Ka', 0, 0, '2023-09-12 12:11:48'),
+(2, 'Saijal', 'Shakya', 'saijalshakya@gmail.com', '$2y$10$1T9O.wpfGzg8bZO7GvLXuegqyeWCcQZ1XMzJusydczdPJCD6W4A0K', 0, 1, '2023-09-12 12:13:41');
 
 --
 -- Indexes for dumped tables
@@ -57,8 +56,7 @@ INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `password`, 
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -68,7 +66,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
