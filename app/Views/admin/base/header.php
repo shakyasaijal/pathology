@@ -4,6 +4,8 @@
     }
 ?>
 <a href="/pathology/admin/about">About</a>
+<a href="/pathology/admin/messages">Messages</a>
+<a href="/pathology/admin/faq">FAQ</a>
 
 <br/>
 <?php

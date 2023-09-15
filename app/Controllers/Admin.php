@@ -10,6 +10,8 @@ class Admin extends Controller
     public function __construct() {
         $this->userModel = $this->model('User');
         $this->aboutModel = $this->model('About');
+        $this->messageModel = $this->model('Message');
+        $this->faqModel = $this->model('Faq');
     }
 
     public function index() {
@@ -87,19 +89,132 @@ class Admin extends Controller
                 'phone' => '',
             ];
 
-            echo '===';
-            print_r($data);
             if($this->aboutModel->updateAboutData($data)){
-                echo 'success';
-                $_SESSION['alert_success'] = 'Update successful';
+                $_SESSION['alert_success'] = 'Update successful.';
             }else{
-                echo 'failed';
-                $_SESSION['alert_failed'] = 'Update failed';
+                $_SESSION['alert_failed'] = 'Update failed. Please try again';
             }
             header('location: /pathology/admin/about');
             exit();
         }else{
-            $_SESSION['ERRORS']['access'] = 'You do not have access to this content.';
+            $_SESSION['alert_failed'] = 'You do not have access to this content.';
+            header('location: /pathology');
+            exit();
+        }
+    }
+
+    public function messages(){
+        if(check_logged_in() && check_is_admin()){
+            $messages = $this->messageModel->getAllMessages();
+            $data = [
+                'title' => 'Messages',
+                'messages' => $messages ? $messages : []
+            ];
+            $this->view('admin/messages', $data);
+        }else{
+            $_SESSION['alert_failed'] = 'You do not have access to this content.';
+            header('location: /pathology');
+            exit();
+        }
+    }
+
+    public function faq(){
+        if(check_logged_in() && check_is_admin()){
+            $faq = $this->faqModel->getAllFaq();
+            $data = [
+                'title' => 'FAQ\'s',
+                'faq' => $faq ? $faq : []
+            ];
+            $this->view('admin/faq', $data);
+        }else{
+            $_SESSION['alert_failed'] = 'You do not have access to this content.';
+            header('location: /pathology');
+            exit();
+        }
+    }
+
+    public function faq_edit($id){
+        if(check_logged_in() && check_is_admin()){
+            $data = [
+                'title' => 'EDIT'
+            ];
+            $row = $this->faqModel->getById($id);
+            if ($row){
+                $data['faq'] = $row;
+                $data['id'] = $id;
+                $this->view('admin/faq-base/edit.html', $data);
+            }else{
+                $_SESSION['alert_failed'] = 'Data not found.';
+                header('location: /pathology/admin/faq');
+                exit();
+            }
+            $this->view('admin/faq-base/edit', $data);
+        }else{
+            $_SESSION['alert_failed'] = 'You do not have access to this content.';
+            header('location: /pathology');
+            exit();
+        }
+    }
+    public function faq_update(){
+        /*
+        * -------------------------------------------------------------------------------
+        *   Securing against Header Injection
+        * -------------------------------------------------------------------------------
+        */
+
+        foreach($_POST as $key => $value){
+            $_POST[$key] = _cleaninjections(trim($value));
+        }
+
+        /*
+        * -------------------------------------------------------------------------------
+        *   Verifying CSRF token
+        * -------------------------------------------------------------------------------
+        */
+        if (!verify_csrf_token()){
+            $_SESSION['STATUS']['loginstatus'] = 'Request could not be validated';
+            header("Location: /pathology/users/login");
+            exit();
+        }
+
+        if (!$_SERVER['REQUEST_METHOD'] == 'POST'){
+            header('location: /pathology/admin/faq');
+            exit();
+        }
+
+        if(check_logged_in() && check_is_admin()){
+            //Sanitize post data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'title' => 'EDIT',
+                'question' => trim($_POST['question']),
+                'answer' => trim($_POST['answer']),
+                'id' => trim($_POST['faq_id']),
+                'questionError' => '',
+                'answerError' => '',
+            ];
+
+            if (empty($data['question'])){
+                $data['questionError'] = 'Please enter a question.';
+            }
+
+            if (empty($data['answer'])){
+                $data['answerError'] = 'Please enter a answer.';
+            }
+
+            if (empty($data['questionError']) && empty($data['answerError'])){
+                if($this->faqModel->updateRow($data)){
+                    $_SESSION['alert_success'] = 'Update successful.';
+                }else{
+                    $_SESSION['alert_success'] = 'Update failed. Please try again.';
+                }
+                header('location: /pathology/admin/faq');
+                exit();
+            }
+
+            $this->view('admin/faq-base/edit', $data);
+        }else{
+            $_SESSION['alert_failed'] = 'You do not have access to this content.';
             header('location: /pathology');
             exit();
         }

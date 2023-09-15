@@ -20,8 +20,22 @@
 --   `expires_at` timestamp NULL DEFAULT NULL
 -- )
 
-CREATE TABLE `about`(
+-- CREATE TABLE `messages`(
+--     `id` INT AUTO_INCREMENT PRIMARY KEY,
+--     `first_name` varchar(50) NOT NULL,
+--     `last_name` varchar(50) NOT NULL,
+--     `email` varchar(100) NOT NULL,
+--     `phone` varchar(255),
+--     `message` text,
+--     `subject` varchar(255),
+--     `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+--     `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+-- )
+
+CREATE TABLE `faq`(
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `info` TEXT NULL,
-    `house_no` 
+    `question` TEXT NOT NULL,
+    `answer` TEXT NOT NULL,
+    `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )
