@@ -1,3 +1,183 @@
 /*============================================================================================*/
-/* Your custom styles below */
+/* Custom styles below */
 /*============================================================================================*/
+.signup-room, .login-room{
+	background: #f8f8f8;
+  }
+  .auth-container{
+	width: 55%;
+	margin: 0 auto;
+  }
+  
+  .auth-container .logo-container{
+	height: 100px;
+	width: 100px;
+	overflow: hidden;
+  }
+  
+  .auth-container .title{
+	text-decoration: unset;
+	color: #716f6f;
+	font-size: 20px;
+	font-weight: 500;
+  }
+  
+  .auth-container .label{
+	font-size: 15px;
+  }
+  .auth-container .form-group:not(:first-child){
+	margin-top: 10px;
+  }
+  
+  .auth-container .forget-password{
+	float: right;
+	font-size: 13px;
+	color: var(--theme-color);
+	font-weight: bold;
+  }
+  
+  .auth-container .sign-in-btn{
+	outline: 0;
+	padding: 10px;
+	border: 0;
+	background: var(--theme-color);
+	color: white;
+	cursor: pointer;
+  }
+  
+  .auth-container .new-here{
+	font-size: 13px;
+	color: var(--text-color);
+	float: right;
+	cursor: pointer;
+  }
+  
+  .auth-container .new-here .up{
+	font-weight: bold;
+  }
+  
+  .auth-container input{
+	padding: 8px;
+	margin-top: 4px;
+	border: 1px solid #a6a6a6;
+	border-top-color: #949494;
+	border-radius: 3px;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 0 rgba(0, 0, 0, 0.07) inset;
+	outline: 0;
+	line-height: 0;
+  }
+  
+  .auth-container .options-for {
+	width: 100%;
+	text-align: center;
+	border-bottom: 1px solid #000;
+	line-height: 0.1em;
+	margin: 10px 0 20px; 
+  }
+  
+  .auth-container .options{
+	padding-top: 15px;
+	padding-bottom: 15px;
+  }
+  
+  .auth-container .options-for span {
+	background: #fff;
+	padding: 0 10px; 
+	font-size: 26px;
+  }
+  
+  .auth-container .form-container{
+	padding: 20px 25px;
+	margin-top: 10px;
+	background: white;
+	border-radius: 6px;
+	background: white;
+	box-shadow: 0 6px 13px -11px black;
+  }
+  
+  .google-login,
+  .facebook-login {
+	margin: 8px auto;
+	height: 42px;
+	background-color: #fcfcfc;
+	border-radius: 2px;
+	box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	align-self: center;
+	user-select: none;
+	transition: all 400ms ease 0s;
+	display: flex; 
+  }
+  .google-login .google-icon-wrapper,
+  .facebook-login .facebook-icon-wrapper {
+	position: absolute;
+	margin-top: 1px;
+	margin-left: 1px;
+	width: 40px;
+	height: 40px;
+	border-radius: 2px;
+	user-select: none; 
+  }
+  
+  .google-login .google-icon-svg,
+  .facebook-login .facebook-icon-svg {
+	position: absolute;
+	margin-top: 11px;
+	margin-left: 11px;
+	width: 18px;
+	color: white;
+	height: 18px;
+	user-select: none; 
+  }
+  
+  .google-login .btn-text,
+  .facebook-login .btn-text {
+	float: right;
+	margin: 9px 14px 40px 40px;
+	color: #757575;
+	font-size: 14px;
+	letter-spacing: 0.2px;
+	user-select: none; 
+  }
+  
+  .google-login:hover,
+  .facebook-login:hover {
+	box-shadow: 0 3px 8px rgba(117, 117, 117, 0.5);
+	user-select: none; }
+  
+  .google-login:active,
+  .facebook-login:active {
+  box-shadow: 0 1px 1px #757575;
+  background: #f8f8f8;
+  color: #fff;
+  user-select: none; 
+  }
+  .facebook-login {
+	background: #3b5898; 
+	margin-top: 20px;
+  }
+  .facebook-login .btn-text {
+	color: white; 
+  }
+  .auth-container .logo-container img{
+	width: 100%;
+	height: 100%;
+	object-fit: scale-down;
+  }
+  
+  .signup-room .sign-up-container{
+	width: 80%;
+	z-index: 1;
+	position: relative;
+  }
+  
+  .signup-background{
+	position: absolute;
+	z-index: 0;
+  }
+  .form-error{
+	width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+  }

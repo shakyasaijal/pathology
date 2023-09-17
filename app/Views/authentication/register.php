@@ -1,34 +1,88 @@
-<?php include('../app/Views/base/header.php')?>
-    <p>Register</p>
-    <form
-        id="register-form"
-        method="POST"
-        action="/pathology/users/user_register"
-        >
-    First Name<input type="text" name="first_name" value='<?php if($data['first_name']) echo $data['first_name']; ?>'>
-    <span class="invalidFeedback">
-        <?php echo $data['first_nameError']; ?>
-    </span>
+<?php include('../app/Views/base/header.php');?>
+<?php include('../app/Views/base/navbar.php');?>
 
-    Last Name<input type="text" name="last_name" value='<?php if($data['last_name']) echo $data['last_name']; ?>'>
-    <span class="invalidFeedback">
-        <?php echo $data['last_nameError']; ?>
-    </span>
-
-    Email <input type="email" placeholder="Email *" name="email" value='<?php if($data['email']) echo $data['email']; ?>'>
-    <span class="invalidFeedback">
-        <?php echo $data['emailError']; ?>
-    </span>
-
-    Password <input type="password" placeholder="Password *" name="password">
-    <span class="invalidFeedback">
-        <?php echo $data['passwordError']; ?>
-    </span>
-
-    Confirm Password <input type="password" placeholder="Confirm Password *" name="confirmPassword">
-    <span class="invalidFeedback">
-        <?php echo $data['confirmPasswordError']; ?>
-    </span>
-
-    <button id="submit" type="submit" value="submit">Submit</button>
-</form>
+<div class="container margin_120_95">
+	<div class="login-room">
+    	<div class="auth-container verticle-center center">
+	        <div class="logo-container center">
+    	        <a href="/"><img src="" alt="Breast Cancer Pathology"></a>
+        	</div>
+        	<div class="form-container">
+            	<div class="title">SIGN UP</div>
+            	
+            	<div class="forms mt-3">
+                    <?php
+						include_once('../app/Views/base/notification.php');
+					?>
+					<form action="/pathology/users/user_register" method="POST">
+						<?php insert_csrf_token(); ?>
+                        <div class="form-group">
+							<div class="label">First Name *</div>
+							<input type="text" name="first_name" class="form-control" autocomplete="off" required value='<?php if($data['first_name']) echo $data['first_name']; ?>'>
+							
+							<?php
+								if (isset($data['first_nameError'])){
+									echo '<div class="form-error">'.
+									$data['first_nameError'].'
+								</div>';
+								}
+							?>
+						</div>
+                        <div class="form-group">
+							<div class="label">Last Name *</div>
+							<input type="text" name="last_name" value='<?php if($data['last_name']) echo $data['last_name']; ?>' class="form-control" autocomplete="off" required value='<?php if($data['first_name']) echo $data['first_name']; ?>'>
+							
+							<?php
+								if (isset($data['last_nameError'])){
+									echo '<div class="form-error">'.
+									$data['last_nameError'].'
+								</div>';
+								}
+							?>
+						</div>
+						<div class="form-group">
+							<div class="label">Email Address *</div>
+							<input type="text" name="email" class="form-control" autocomplete="off" required value='<?php if($data['email']) echo $data['email']; ?>'>
+							
+							<?php
+								if (isset($data['emailError'])){
+									echo '<div class="form-error">'.
+									$data['emailError'].'
+								</div>';
+								}
+							?>
+						</div>
+						<div class="form-group">
+							<div class="label">Password *</div>
+							<input type="password" name="password" class="form-control" autocomplete="off" required>
+                            <?php
+								if (isset($data['passwordError'])){
+									echo '<div class="form-error">'.
+									$data['passwordError'].'
+								</div>';
+								}
+							?>
+						</div>
+                        <div class="form-group">
+							<div class="label">Confirm Password *</div>
+							<input type="password" name="confirmPassword" class="form-control" autocomplete="off" required>
+                            <?php
+								if (isset($data['confirmPasswordError'])){
+									echo '<div class="form-error">'.
+									$data['confirmPasswordError'].'
+								</div>';
+								}
+							?>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-success">Sign Up</button>
+							<a href="/pathology/users/login" class="new-here"><span>Have an account? <span class="up">Sign In Now</span></span></a>
+						</div>
+					</form>
+            	</div>
+        	</div>
+		</div>
+	</div>
+</div>
+<?php include('../app/Views/base/footer.php');?>
+	

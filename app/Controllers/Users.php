@@ -90,7 +90,6 @@ class Users extends Controller
                     if(gettype($loggedInUser) == 'boolean'){
                         $_SESSION['ERRORS']['passwordError'] = 'Authentication Failed.';
                         $data['passwordError'] = "Authentication Failed.";
-                        error_log('khoy');
                     }
                     else if(!$loggedInUser->email){
                         $_SESSION['ERRORS']['passwordError'] = 'Authentication Failed.';
@@ -236,11 +235,22 @@ class Users extends Controller
                 //Register user from model function
                 if ($this->userModel->register($data)) {
                     //Redirect to the login page
+                    $_SESSION['alert_success'] = '<strong>Sign Up Successful!</strong> Please login with your credentials.';
+                    include_once '../app/utils/sendEmail.php';
+                    $subject = 'Sign Up Completed!';
+                    $email_template = 'sign_up_completed.html';
+                    $email_to = $data['email'];
+                    $user_name = $data['first_name']. ' '. $data['last_name'];
+                    sendEmail($subject, $email_template, $email_to, $user_name);
                     header('location: /pathology/users/login');
+                    exit();
                 } else {
                     die('Something went wrong.');
                 }
             }
+        }
+        if (isset($data['first_nameError']) || isset($data['last_nameError']) || isset($data['emailError']) || isset($data['passwordError']) || isset($data['confirmPasswordError'])) {
+            $_SESSION['alert_failed'] = '<strong>Error!</strong> Please resolve the errors below.';
         }
         $this->view('authentication/register', $data);
     }

@@ -21,26 +21,14 @@
 	<link href="/pathology/css/menu.css" rel="stylesheet">
 	<link href="/pathology/css/vendors.css" rel="stylesheet">
 	<link href="/pathology/css/icon_fonts/css/all_icons_min.css" rel="stylesheet">
-	<!-- YOUR CUSTOM CSS -->
+	<!-- CUSTOM CSS -->
     <link href="/pathology/css/blog.css" rel="stylesheet">
-
 	<link href="/pathology/css/custom.css" rel="stylesheet">
-	
 </head>
 <body>
 	<div id="page">		
 	<?php
 		if (check_logged_in()){
 			echo '<a class="dropdown-item text-muted" href="/pathology/users/logout"><i class="fa fa-running pr-2"></i> Logout</a>';
-		}
-
-		if(isset($_SESSION['alert_failed'])){
-			echo $_SESSION['alert_failed'];
-			unset($_SESSION['alert_failed']);
-		}
-
-		if(isset($_SESSION['alert_success'])){
-			echo $_SESSION['alert_success'];
-			unset($_SESSION['alert_success']);
 		}
 	?>

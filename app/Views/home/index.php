@@ -1,6 +1,5 @@
 <?php include('../app/Views/base/header.php');?>
 <?php include('../app/Views/base/navbar.php');?>
-<main>
 		<div class="hero_home version_1">
 			<div class="content">
 				<h3>Find a Doctor!</h3>
@@ -199,6 +198,5 @@
 			<!-- /container -->
 		</div>
 		<!-- /app_section -->
-	</main>
 
 <?php include('../app/Views/base/footer.php');?>
