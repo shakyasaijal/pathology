@@ -69,15 +69,6 @@
 	<!-- COMMON SCRIPTS -->
 	<script src="/pathology/js/jquery-2.2.4.min.js"></script>
 	<script src="/pathology/js/common_scripts.min.js"></script>
-	<script src="/pathologyjs/functions.js"></script>
-	<script src="/pathology/js/jquery.cookiebar.js"></script>
-	<script>
-		$(document).ready(function(){
-		'use strict';
-		 $.cookieBar({
-			fixed: true
-		});
-		});
-	</script>
+	<script src="/pathology/js/functions.js"></script>
 </body>
 </html>

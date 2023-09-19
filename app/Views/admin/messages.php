@@ -6,9 +6,7 @@
 <table border="1">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Full Name</th>
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Message</th>
@@ -22,9 +20,7 @@
 
             foreach ($data['messages'] as $row) {
                 echo '<tr>';
-                echo '<td>' . $row['id'] . '</td>';
-                echo '<td>' . $row['first_name'] . '</td>';
-                echo '<td>' . $row['last_name'] . '</td>';
+                echo '<td>' . $row['full_name'] . '</td>';
                 echo '<td>' . $row['email'] . '</td>';
                 echo '<td>' . $row['phone'] . '</td>';
                 echo '<td>' . $row['message'] . '</td>';

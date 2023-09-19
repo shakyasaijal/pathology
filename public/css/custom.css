@@ -1,6 +1,12 @@
 /*============================================================================================*/
 /* Custom styles below */
 /*============================================================================================*/
+:root{
+	--theme-color: #3f4079;
+	--theme-light: #3f40791c;
+	--theme-f-color: #fff;
+}
+
 .signup-room, .login-room{
 	background: #f8f8f8;
   }
@@ -20,6 +26,10 @@
 	color: #716f6f;
 	font-size: 20px;
 	font-weight: 500;
+  }
+
+  .contact-wrap{
+	background-color: var(--theme-light);
   }
   
   .auth-container .label{
@@ -180,4 +190,17 @@
     margin-top: 0.25rem;
     font-size: 80%;
     color: #dc3545;
+  }
+  .bg-theme{
+	background-color: var(--theme-color);
+  }
+  .f-theme *{
+	color: var(--theme-f-color);
+  }
+  .fa-icon-size{
+	font-size: 20px;
+  }
+  .theme-btn{
+	background-color: var(--theme-color);
+	color: #fff;
   }

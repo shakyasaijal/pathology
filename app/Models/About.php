@@ -36,4 +36,19 @@ class About extends Core\Model
             return false;
         }
     }
+    public function saveMessages($data){
+        $this->db->query('INSERT INTO messages(full_name, email, phone, subject, message) 
+        VALUES(:full_name, :email, :phone, :subject, :message)');
+
+        $this->db->bind(':full_name', $data['full_name']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':phone', $data['phone']);
+        $this->db->bind(':subject', $data['subject']);
+        $this->db->bind(':message', $data['message']);
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

@@ -56,27 +56,6 @@
 			</div>
 			<!-- /container -->
 		</div>
-		<!-- /Hero -->
-		<div class="container margin_120_95" style="background-color:white;border-radius:20%;box-shadow:0px 0px 20px 2px #7777;">
-			<div class="main_title wow fadeInDown">
-				<h2>People have visited <span style="color:gold;font-weight:bold;">{{t.name}}</span> Doctor mostly</h2>
-				<p>It is all based on <u style="color:gold;font-weight:bold;">User Experience</u> and <u style="color:gold;font-weight:bold;">Recommended</u> for you.	</p>
-			</div>
-			<div class="row add_bottom_30">
-				<div class="col-lg-4 ">
-					
-				</div>
-				<div class="col-lg-4 text-center wow fadeInRight">
-					<a href="{% url 'front:recommend' t.id %}">
-					<button class="btn btn-warning">Find {{t.name}} Doctor</button>
-					</a>
-				</div>
-				<div class="col-lg-4 ">
-					
-				</div>
-			</div>
-		</div>
-		<!-- /Hero -->
 		<div class="container margin_120_95">
 			<div class="main_title">
 				<h2>Discover the <strong>online</strong> appointment!</h2>
@@ -135,52 +114,15 @@
 			</div>
 			<!-- /container -->
 		</div>
-		<!-- /white_bg -->
-		<div class="container margin_120_95">
-			<div class="main_title">
-				<h2>News and Events</h2>
-				<p></p>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-xl-4 col-lg-5 col-md-6">
-					<div class="list_home">
-						<div class="list_title">
-							<i class="icon_pin_alt"></i>
-							<h3>News</h3>
-						</div>
-						<ul>
-						{% for news in news %}
-								<li class="wow fadeInDown"><a href="{% url 'front:news' news.pk %}"><strong>{{forloop.counter}}</strong>{{news.title}}</a></li>
-						{% endfor %}
-						</ul>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-5 col-md-6">
-					<div class="list_home">
-						<div class="list_title">
-							<i class="icon_archive_alt"></i>
-							<h3>Events</h3>
-						</div>
-						<ul>
-							{% for events in events %}
-									<li class="wow fadeInDown"><a href="{% url 'front:events' events.pk %}"><strong>{{forloop.counter}}</strong>{{ events.title }}</a></li>									
-							{% endfor %}
-						</ul>
-					</div>
-				</div>
-			</div>
-			<!-- /row -->
-		</div>
-		<!-- /container -->
 		<div id="app_section">
 			<div class="container">
 				<div class="row justify-content-around">
 					<div class="col-md-5">
-						<p><img src="{% static 'frontend/img/app_img.svg' %}" alt="" class="img-fluid" width="500" height="433"></p>
+						<p><img src="/pathology/img/app_img.svg" alt="" class="img-fluid" width="500" height="433"></p>
 					</div>
 					<div class="col-md-6">
 						<small>Application</small>
-						<h3>Download <strong>Bio Hospital App</strong> Now!</h3>
+						<h3>Download <strong>Pathology App</strong> Now!</h3>
 						<p class="lead">Tota omittantur necessitatibus mei ei. Quo paulo perfecto eu, errem percipit ponderum no eos. Has eu mazim sensibus. Ad nonumes dissentiunt qui, ei menandri electram eos. Nam iisque consequuntur cu.</p>
 						<div class="app_buttons wow" data-wow-offset="100">
 							<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 43.1 85.9" style="enable-background:new 0 0 43.1 85.9;" xml:space="preserve">
@@ -188,8 +130,8 @@
 							<path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-1" d="M40.6,78.1C39,71.3,37.2,64.6,35.2,58" />
 							<path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-2" d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9" />
 						</svg>
-							<a href="#0" class="fadeIn"><img src="{% static 'frontend/img/apple_app.png' %}" alt="" width="150" height="50" data-retina="true"></a>
-							<a href="#0" class="fadeIn"><img src="{% static 'frontend/img/google_play_app.png' %}" alt="" width="150" height="50" data-retina="true"></a>
+							<a href="#0" class="fadeIn"><img src="/pathology/img/apple_app.png" alt="" width="150" height="50" data-retina="true"></a>
+							<a href="#0" class="fadeIn"><img src="/pathology/img/google_play_app.png" alt="" width="150" height="50" data-retina="true"></a>
 						</div>
 					</div>
 				</div>

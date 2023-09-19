@@ -13,16 +13,21 @@
 	<link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="/pathology/img/apple-touch-icon-72x72-precomposed.png">
 	<link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="/pathology/img/apple-touch-icon-114x114-precomposed.png">
 	<link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="/pathology/img/apple-touch-icon-144x144-precomposed.png">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	<!-- GOOGLE WEB FONT -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
+	
 	<!-- BASE CSS -->
 	<link href='/pathology/css/bootstrap.min.css' rel="stylesheet">
 	<link href="/pathology/css/style.css" rel="stylesheet">
 	<link href="/pathology/css/menu.css" rel="stylesheet">
 	<link href="/pathology/css/vendors.css" rel="stylesheet">
-	<link href="/pathology/css/icon_fonts/css/all_icons_min.css" rel="stylesheet">
+	<!-- <link href="/pathology/css/icon_fonts/css/all_icons_min.css" rel="stylesheet"> -->
+	
 	<!-- CUSTOM CSS -->
-    <link href="/pathology/css/blog.css" rel="stylesheet">
 	<link href="/pathology/css/custom.css" rel="stylesheet">
 </head>
 <body>

@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3 col-6">
-				<a href="/"><h3>BC Pathology</h3></a>	
+				<a href="/pathology"><h3>BC Pathology</h3></a>	
 			</div>
 			<div class="col-lg-9 col-6">
 			
@@ -23,10 +23,10 @@
 							<span><a href="{% url 'front:list' %}">Doctors</a></span>
 						</li>
 						<li>
-							<span><a href="{% url 'front:blogs' %}">News and Events</a></span>
+							<span><a href="/pathology/contact">Contact</a></span>
 						</li>
 						<li>
-							<span><a href="{% url 'front:about' %}">About Us</a></span>
+							<span><a href="/pathology/about">About Us</a></span>
 						</li>
 						<li>
 							<span><a href="/pathology/users/login">Login</a></span>
