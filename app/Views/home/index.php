@@ -2,11 +2,11 @@
 <?php include('../app/Views/base/navbar.php');?>
 		<div class="hero_home version_1">
 			<div class="content">
-				<h3>Find a Doctor!</h3>
+				<h3>Use Our AI!</h3>
 				<p>
-					Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.
+					An easy way to predict the breast cancer in real-time.
 				</p>
-				{% include 'front/forms/doctorSearch.html' %}
+				<a href="/pathology/ai" class="btn btn-lg btn-success">Use Now</a>
 			</div>
 		</div>
         <div class="bg_color_1">

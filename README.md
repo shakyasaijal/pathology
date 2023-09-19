@@ -16,6 +16,8 @@ If you want to setup PHP and run the application in your host os.
 
 - [PHP >= v8.2](https://www.php.net/downloads.php)
 - [Composer >= v2.5](https://getcomposer.org/download/)
+- [Python >= 3.8.10](https://www.python.org/downloads/)
+- [Virtualenv >= 20.14.0](https://pypi.org/project/virtualenv/)
 
 # Running it locally
 
@@ -31,6 +33,7 @@ $ cd pathology
 
 # Project Setup
 
+## Important Setup
 ```
 ** Please put the root directory [pathology] in /var/www/html
 ```
@@ -47,11 +50,34 @@ $ sudo nano .env
 Then change all the variables like database username, passwords, email address and its password, etc.
 ```
 
+## PHP Setup
+
 Pull the dependencies and start server.
 
 ```
 $ composer install
 ```
+
+## Python Setup
+
+```
+/**
+    At first, we need to create virtual environment and install all dependencies.
+*/
+
+$ cd public/machine-learning
+$ virtualenv venv
+$ source venv/bin/activate
+$ pip install -r requirements.txt
+```
+
+```
+Now, we will start python server
+
+$ python predict.py
+
+```
+
 
 # Clone Database
 

@@ -204,3 +204,6 @@
 	background-color: var(--theme-color);
 	color: #fff;
   }
+  .ai_home_cover{
+	background:url('/pathology/img/ai.png') center bottom no-repeat #3f4079 !important;
+  }
