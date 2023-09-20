@@ -230,3 +230,15 @@
   .high_chance{
 	background: #ff5333;
   }
+  .bg_theme{
+	background: #f5f5f5;
+  }
+  .img-container{
+    height: 500px;
+    width: 500px;
+    margin: 0 auto;
+  }
+  .img-container img{
+    height: 100%;
+    object-fit: scale-down;
+  }

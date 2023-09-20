@@ -82,6 +82,48 @@
 			</div>
 			<!-- /container -->
 		</div>
+		<!-- Information about AI -->
+		<div class="bg_color_1 bg_theme">
+			<div class="container margin_120_95">
+				<div class="main_title">
+					<h2><b>About Our AI</b></h2>
+					<p>Please go through the following information before using our AI</p>
+				</div>
+				<div id="" class="container ai">
+					<div class="form-box">
+						<h2 class="text-center">AI Prediction</h2>
+						<p class="text-center">
+						Our AI model for breast cancer prediction boasts a commendable <b>90% accuracy rate</b>, demonstrating its potential to significantly improve early diagnosis and patient outcomes. Leveraging advanced machine learning algorithms, it analyzes intricate patterns within medical data to swiftly and accurately identify potential malignancies. This high level of precision not only aids healthcare professionals in making informed decisions but also offers patients the benefit of early intervention, ultimately saving lives. Our model represents a powerful tool in the fight against breast cancer, underlining the remarkable potential of AI in the realm of medical diagnostics and enhancing the quality of healthcare delivery.
+						</p>
+						
+					</div>
+				</div>
+				<div id="" class="container ai mt-5">
+					<div class="form-box">
+						<h2 class="text-center">Getting hands on report</h2>
+						<p class="text-center">
+							There are several clinics who are screening the breast for early detection of breast cancer in women.
+							Basic screening will not be useful for predicting cancer using our AI. We recommend you to do <a href="https://www.breastscreen.nsw.gov.au/about-screening-mammograms" target="_blank"><b>Mammogram Screening</b></a>
+							You can get the mammogram report in your email. Currently, <a href="https://www.breastscreen.nsw.gov.au/" target="_blank"><b>Breast Screen Service NSW</b></a> is 
+							giving free mammograph screening.
+						</p>
+						
+					</div>
+				</div>
+				<div id="" class="container ai mt-5">
+					<div class="form-box">
+						<h2 class="text-center">Mammogram Report Samping</h2>
+						<div class="img-container">
+							<img src="/pathology/img/breast/gram.png" class="img-fluid">
+						</div>
+						<div class="img-container">
+							<img src="/pathology/img/breast/gram2.png" class="img-fluid">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /container -->
+		</div>
 		<script src="/pathology/js/jquery-2.2.4.min.js"></script>
 		<script>
 			$(document).ready(function(){
