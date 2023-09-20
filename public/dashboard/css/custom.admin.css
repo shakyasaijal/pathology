@@ -1,0 +1,18 @@
+:root{
+	--theme-color: #3f4079;
+	--theme-light: #3f40791c;
+	--theme-f-color: #fff;
+}
+
+form.user .form-control-user{
+    border-radius: unset;
+}
+
+.user label{
+    font-weight: bold;
+}
+
+.btn-theme{
+    background-color: var(--theme-color);
+    color: var(--theme-f-color);
+}

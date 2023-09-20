@@ -22,7 +22,7 @@ class Admin extends Controller
             $this->view('admin/index', $data);
         }else{
             $_SESSION['ERRORS']['access'] = 'You do not have access to this page.';
-            header('location: /pathology/');
+            header('location: /pathology/admin/login');
             exit();
         }
     }
@@ -70,22 +70,18 @@ class Admin extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
                 'info' => trim($_POST['info']),
-                'house_no' => trim($_POST['house_no']),
-                'street_name' => trim($_POST['street_name']),
-                'state' => trim($_POST['state']),
-                'postal' => trim($_POST['postal_code']),
-                'city' => trim($_POST['city']),
-                'country' => trim($_POST['country']),
+                'full_address' => trim($_POST['full_address']),
+                'email' => trim($_POST['email']),
+                'facebook_link' => trim($_POST['facebook_link']),
+                'linkedin_link' => trim($_POST['linkedin_link']),
                 'phone' => trim($_POST['phone']),
             ];
             $data['error'] = [
                 'info' => '',
-                'house' => '',
-                'street' => '',
-                'state' => '',
-                'postal' => '',
-                'city' => '',
-                'country' => '',
+                'full_address' => '',
+                'email' => '',
+                'facebook_link' => '',
+                'linkedin_link' => '',
                 'phone' => '',
             ];
 

@@ -135,7 +135,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` VALUES
 (1, 'John', 'Doe', 'user@gmail.com', '$2y$10$zAOKmKAl72QGAkpROmOlv.PBqat.cSgIu7GA3xXI9yFYik0RRj4G.', 0, 0, '2023-09-19 11:08:04'),
-(2, 'Admin', 'User', 'admin@admin.com', '$2y$10$0wvgo9Pvc2pRghb7L9uXUebo7./bKNuiJm3gXj2IIHgiicE9JU6EK', 0, 0, '2023-09-19 11:08:53');
+(2, 'Admin', 'User', 'admin@admin.com', '$2y$10$0wvgo9Pvc2pRghb7L9uXUebo7./bKNuiJm3gXj2IIHgiicE9JU6EK', 0, 1, '2023-09-19 11:08:53');
 
 --
 -- Indexes for dumped tables
