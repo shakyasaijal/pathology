@@ -160,12 +160,17 @@
 							}
 							$('.predicting').css('display', 'none');
 							$('.to_predict').css('display', 'block');
+						},
+						error: function (request, status, error) {
+							if (status === 'error'){
+								$('#result').html('Looks like our server is down. Please try again.');
+								$('#result').addClass('less_chance');
+								$('.predicting').css('display', 'none');
+								$('.to_predict').css('display', 'block');
+							}
 						}
 					});					
 				});
 			});
 		</script>
 <?php include('../app/Views/base/footer.php');?>
-$("button").click(function(){
-  
-});
