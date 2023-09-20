@@ -23,13 +23,13 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="name">Radius Effected *</label>
-										<input class="form-control" step="0.01" id="radius_mean" type="number" name="radius" required>
+										<input class="form-control" step="0.01" id="radius_mean" type="number" name="radius" min="0" max="100" required>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="name">Perimeter Covered *</label>
-										<input class="form-control" step="0.01" id="perimeter_mean" type="number" name="perimeter" required>
+										<input class="form-control" step="0.01" id="perimeter_mean" type="number" name="perimeter" min="0" max="100" required>
 									</div>
 								</div>
 							</div>
@@ -37,13 +37,13 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="name">Area Mean *</label>
-										<input class="form-control" step="0.01" id="area_mean" type="number" name="area" required>
+										<input class="form-control" step="0.01" id="area_mean" type="number" name="area" min="0" max="100" required>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="name">Symmetry *</label>
-										<input class="form-control" step="0.01" id="symmetry_mean" type="number" name="symmetry" required>
+										<input class="form-control" step="0.01" id="symmetry_mean" type="number" name="symmetry" min="0" max="100" required>
 									</div>
 								</div>
 							</div>
@@ -51,13 +51,13 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="name">Compactness *</label>
-										<input class="form-control" step="0.01" id="compactness_mean" type="number" name="compactness" required>
+										<input class="form-control" step="0.01" id="compactness_mean" type="number" name="compactness" min="0" max="100" required>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="name">Concave Points *</label>
-										<input class="form-control" step="0.01" id="concave_mean" type="number" name="concave" required>
+										<input class="form-control" step="0.01" id="concave_mean" type="number" name="concave" min="0" max="100" required>
 									</div>
 								</div>
 							</div>
@@ -152,10 +152,10 @@
 						contentType: 'application/json',
 						success: function (data) {
 							if (data === '1'){
-								$('#result').html('Our AI has predicted that you have higher chances of Breast Cancer.');
+								$('#result').html('Our AI has predicted that you have <b>higher chances</b> of Breast Cancer.');
 								$('#result').addClass('high_chance');
 							}else{
-								$('#result').html('Our AI has predicted that you have less chances of Breast Cancer.');
+								$('#result').html('Our AI has predicted that you have <b>less chances</b> of Breast Cancer.');
 								$('#result').addClass('less_chance');
 							}
 							$('.predicting').css('display', 'none');
