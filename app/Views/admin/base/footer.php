@@ -26,9 +26,6 @@
     <!-- Core plugin JavaScript-->
     <script src="/pathology/dashboard/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/pathology/dashboard/js/sb-admin-2.min.js"></script>
-    <script src="/pathology/dashboard/js/admin.js"></script>
 </body>
 
 </html>
