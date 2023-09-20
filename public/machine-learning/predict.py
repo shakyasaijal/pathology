@@ -5,10 +5,14 @@ import pickle
 import numpy as np
 import os
 from dotenv import load_dotenv
+from flask_cors import CORS
 
 load_dotenv('../../app/config/.env')
 
+
 app = Flask(__name__)
+CORS(app)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Load the pickle model
 with open('./pathology.pkl', 'rb') as file:
@@ -23,6 +27,7 @@ def predict():
         prediction = model.predict(data_frame)
         return json.dumps(int(prediction[0]))
     except Exception as e:
+        print(e)
         return json.dumps('There was a server load. Please try again.')
 
 

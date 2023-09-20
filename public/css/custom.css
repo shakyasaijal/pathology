@@ -207,3 +207,26 @@
   .ai_home_cover{
 	background:url('/pathology/img/ai.png') center bottom no-repeat #3f4079 !important;
   }
+  .ai label{
+	font-weight: bold;
+  }
+
+  .container.ai{
+	background: var(--theme-light);
+    padding: 2rem 3rem;
+    border-radius: 10px;
+  }
+  .predicting{
+	display: none;
+  }
+  #result{
+	font-weight: bold;
+	padding: 10px 0;
+	margin-bottom: 1rem;
+  }
+  .less_chance{
+	background: #d8ff20;
+  }
+  .high_chance{
+	background: #ff5333;
+  }
