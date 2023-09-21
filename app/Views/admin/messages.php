@@ -64,33 +64,3 @@ $(document).ready(function() {
 });
 
 </script>
-<!-- 
-<table border="1">
-        <thead>
-            <tr>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Message</th>
-                <th>Subject</th>
-                <th>Created At</th>
-                <th>Updated At</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-
-            foreach ($data['messages'] as $row) {
-                echo '<tr>';
-                echo '<td>' . $row['full_name'] . '</td>';
-                echo '<td>' . $row['email'] . '</td>';
-                echo '<td>' . $row['phone'] . '</td>';
-                echo '<td>' . $row['message'] . '</td>';
-                echo '<td>' . $row['subject'] . '</td>';
-                echo '<td>' . $row['created_at'] . '</td>';
-                echo '<td>' . $row['updated_at'] . '</td>';
-                echo '</tr>';
-            }
-            ?>
-        </tbody>
-    </table> -->

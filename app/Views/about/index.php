@@ -27,6 +27,13 @@
 				<h2>Our founders</h2>
 			</div>
 			<div id="staff" class="owl-carousel owl-theme">
+			<div class="item">
+					<a href="javascript:void(0)">
+						<div class="title">
+							<h4>Ayush Yagol<em>CEO</em></h4>
+						</div><img src="/pathology/img/ayush.png" alt="">
+					</a>
+				</div>
 				<div class="item">
 					<a href="javascript:void(0)">
 						<div class="title">
@@ -34,13 +41,7 @@
 						</div><img src="/pathology/img/roisha.png" alt="">
 					</a>
 				</div>
-				<div class="item">
-					<a href="javascript:void(0)">
-						<div class="title">
-							<h4>Ayush Yagol<em>CEO</em></h4>
-						</div><img src="/pathology/img/ayush.png" alt="">
-					</a>
-				</div>
+				
 				<div class="item">
 					<a href="javascript:void(0)">
 						<div class="title">
