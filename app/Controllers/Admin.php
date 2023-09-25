@@ -215,4 +215,69 @@ class Admin extends Controller
             exit();
         }
     }
+
+    public function faq_delete(){
+        /*
+        * -------------------------------------------------------------------------------
+        *   Securing against Header Injection
+        * -------------------------------------------------------------------------------
+        */
+
+        foreach($_POST as $key => $value){
+            $_POST[$key] = _cleaninjections(trim($value));
+        }
+
+        /*
+        * -------------------------------------------------------------------------------
+        *   Verifying CSRF token
+        * -------------------------------------------------------------------------------
+        */
+        if (!verify_csrf_token()){
+            $_SESSION['STATUS']['loginstatus'] = 'Request could not be validated';
+            header("Location: /pathology/users/login");
+            exit();
+        }
+
+        if (!$_SERVER['REQUEST_METHOD'] == 'POST'){
+            header('location: /pathology/admin/faq');
+            exit();
+        }
+
+        if(check_logged_in() && check_is_admin()){
+            //Sanitize post data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'title' => 'EDIT',
+                'question' => trim($_POST['question']),
+                'answer' => trim($_POST['answer']),
+                'id' => trim($_POST['faq_id']),
+                'questionError' => '',
+                'answerError' => '',
+            ];
+
+            if (empty($data['question'])){
+                $data['questionError'] = 'Please enter a question.';
+            }
+
+            if (empty($data['answer'])){
+                $data['answerError'] = 'Please enter a answer.';
+            }
+
+            if (empty($data['questionError']) && empty($data['answerError'])){
+                if($this->faqModel->updateRow($data)){
+                    $_SESSION['alert_success'] = 'Update successful.';
+                }else{
+                    $_SESSION['alert_success'] = 'Update failed. Please try again.';
+                }
+                header('location: /pathology/admin/faq');
+                exit();
+            }
+
+            $this->view('admin/faq-base/edit', $data);
+        }else{
+            $_SESSION['alert_failed'] = 'You do not have access to this content.';
+            header('location: /pathology');
+            exit();
+        }
+    }
 }

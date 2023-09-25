@@ -25,6 +25,7 @@
 
     <!-- Core plugin JavaScript-->
     <script src="/pathology/dashboard/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/pathology/dashboard/swal/swal.min.js"></script>
 
 </body>
 

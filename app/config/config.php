@@ -2,7 +2,7 @@
 
 //Note: This file should be included first in every php page.
 error_reporting(E_ALL);
-ini_set('display_errors', 'Off');
+ini_set('display_errors', 'On');
 
 /*
 |--------------------------------------------------------------------------

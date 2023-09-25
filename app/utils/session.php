@@ -1,4 +1,5 @@
 <?php
+    include('../app/Models/User.php');
 
     function _cleaninjections($test) {
 
@@ -88,5 +89,56 @@
             return true;
         }else{
             return false;
+        }
+    }
+
+    function force_login($email) {
+
+        $userModel = new Pathology\Models\User();
+
+        $row = $userModel->doForceLogin($email);
+        if(!$row){
+            return false;
+        }else{
+            if ($row->is_verified != NULL){
+                $_SESSION['auth'] = 'verified';
+            }else{
+                $_SESSION['auth'] = 'loggedIn';
+            }
+
+            $_SESSION['verified'] =$row->is_verified;
+            $_SESSION['user_id'] = $row->user_id;
+            $_SESSION['email'] = $row->email;
+            $_SESSION['is_admin'] = $row->is_admin;
+            return true;
+        }
+    }
+
+    function check_remember_me(){
+        $userModel = new Pathology\Models\User();
+        if (empty($_SESSION['auth']) && !empty($_COOKIE['rememberme'])) {
+            list($selector, $validator) = explode(':', $_COOKIE['rememberme']);
+            $row = $userModel->getAuthToken($selector);
+
+
+            if (!$row){
+                return false;
+            }else{
+                $tokenBin = hex2bin($validator);
+                $tokenCheck = password_verify($tokenBin, $row->token);
+
+                if ($tokenCheck === false) {
+
+                    // COOKIE VALIDATION FAILURE
+                    return false;
+                }
+                else if ($tokenCheck === true) {
+
+                    $email = $row->user_email;
+                    force_login($email);
+                    
+                    return true;
+                }
+            }
         }
     }

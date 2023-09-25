@@ -107,11 +107,8 @@ class Users extends Controller
                             setcookie(
                                 'rememberme',
                                 $selector.':'.bin2hex($token),
-                                time() + 864000,
-                                '/pathology',
-                                '/pathology',
-                                false, // TLS-only
-                                true  // http-only
+                                time() + (86400 * 30), // 86400 = 1 day
+                                '/',
                             );
     
                             // Create authentication token
@@ -300,5 +297,85 @@ class Users extends Controller
         }
         header('location: /pathology/');
         exit();
+    }
+
+    public function forget_password(){
+        if(check_logged_in()){
+            $_SESSION['alert_failed'] = 'You are already logged in!';
+            header('location: /pathology');
+            exit();
+        }else{
+            $data = [
+                'title' => 'Forget Password',
+            ];
+            $this->view('authentication/forget_password', $data);
+        }
+    }
+
+    public function send_password_reset(){
+        /*
+        * -------------------------------------------------------------------------------
+        *   Securing against Header Injection
+        * -------------------------------------------------------------------------------
+        */
+
+        foreach($_POST as $key => $value){
+            $_POST[$key] = _cleaninjections(trim($value));
+        }
+
+        /*
+        * -------------------------------------------------------------------------------
+        *   Verifying CSRF token
+        * -------------------------------------------------------------------------------
+        */
+
+        if (!verify_csrf_token()){
+            $_SESSION['alert_failed'] = 'Request could not be validated.';
+            header("Location: /pathology/users/forget_password");
+            exit();
+        }
+        $data = [
+            'title' => 'Forget Password',
+            'email' => '',
+            'emailError' => '',
+        ];
+
+        //Check for post
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //Sanitize post data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'email' => trim($_POST['email']),
+                'emailError' => '',
+            ];
+
+            //Validate email
+            if (empty($data['email'])) {
+                $data['emailError'] = 'Please enter a username.';
+            }
+            $user_id = $this->userModel->findUserByEmail($data['email']);
+            if (!$user_id) {
+                $_SESSION['alert_success'] = 'If this email is recorded in our system, then you will receive a password reset email.';
+                header('location: /pathology/users/forget_password');
+                exit();
+            }else{
+                $token = bin2hex(random_bytes(16));
+
+                $token_hash = hash("sha256", $token);
+
+                $expiry = date("Y-m-d H:i:s", time() + 60 * 30);
+                
+                $this->userModel->setUserToken($token_hash, $expiry, $user_id);
+
+                include_once '../app/utils/sendEmail.php';
+                $subject = 'Breast Cancer Pathology | Reset Password';
+                $email_template = 'password_reset.html';
+                $email_to = $data['email'];
+                $user_name = $data['first_name']. ' '. $data['last_name'];
+                sendEmail($subject, $email_template, $email_to, $user_name);
+            }
+        }else{
+            $_SESSION['alert_failed'] = 'Request could not be sent.';
+        }
     }
 }

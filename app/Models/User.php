@@ -66,6 +66,22 @@ class User extends Core\Model
         }
     }
 
+    public function getUserId($email){
+        //Prepared statement
+        $this->db->query('SELECT * FROM users WHERE email = :email');
+
+        //Email param will be binded with the email variable
+        $this->db->bind(':email', $email);
+
+        //Check if email is already registered
+        $this->db->execute();
+        if($this->db->rowCount() > 0) {
+            return $this->db->single();
+        } else {
+            return false;
+        }
+    }
+
     // Remove user authentication token
     public function removeAuthToken($email){
         //Prepared statement
@@ -86,5 +102,41 @@ class User extends Core\Model
         $this->db->bind(':expires_at', $date);
         $this->db->execute();
         error_log($email);
+    }
+
+    public function getAuthToken($selector){
+        $this->db->query("SELECT * FROM auth_tokens WHERE auth_type='remember_me' AND selector=:selector AND expires_at >= NOW() LIMIT 1;");
+        $this->db->bind(':selector', $selector);
+        $this->db->execute();
+
+        if($this->db->execute()){
+            return $this->db->single();
+        }else{
+            return false;
+        }
+    }
+
+    public function doForceLogin($email){
+        $this->db->query("SELECT * FROM users WHERE email=:email");
+        $this->db->bind(':email', $email);
+        if ($this->db->execute()){
+            return $this->db->single();
+        }else{
+            return false;
+        }
+    }
+
+    public function setUserToken($token_hash, $expiry, $user_id){
+        $this->db->query('INSERT INTO user_token (user_id, reset_token_hash, expiry_at)
+        VALUES (:user_id, :token_hash, :expiry)');
+
+        $this->db->bind(':user_id', $user_id);
+        $this->db->bind(':token_hash', $token_hash);
+        $this->db->bind(':expiry', $expiry);
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

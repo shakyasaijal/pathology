@@ -33,7 +33,10 @@
 <body>
 	<div id="page">		
 	<?php
-		if (check_logged_in()){
-			echo '<a class="dropdown-item text-muted" href="/pathology/users/logout"><i class="fa fa-running pr-2"></i> Logout</a>';
+
+		if (isset($_SESSION['auth'])){
+			$_SESSION['expire'] = ALLOWED_INACTIVITY_TIME;
 		}
+		generate_csrf_token();
+		check_remember_me();
 	?>

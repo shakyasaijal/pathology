@@ -111,3 +111,17 @@ INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `password`, 
 (1, 'John', 'Doe', 'user@gmail.com', '$2y$10$zAOKmKAl72QGAkpROmOlv.PBqat.cSgIu7GA3xXI9yFYik0RRj4G.', 0, 0, '2023-09-19 11:08:04'),
 (2, 'Admin', 'User', 'admin@admin.com', '$2y$10$0wvgo9Pvc2pRghb7L9uXUebo7./bKNuiJm3gXj2IIHgiicE9JU6EK', 0, 1, '2023-09-19 11:08:53');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_token`
+-- For password reset
+--
+
+CREATE TABLE user_token (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    reset_token_hash VARCHAR(255) NOT NULL,
+    expire_at DATETIME NOT NULL,
+    FOREIGN KEY (id) REFERENCES users(user_id)
+);

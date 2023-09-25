@@ -4,8 +4,8 @@
 <div class="container margin_120_95">
 	<div class="login-room">
     	<div class="auth-container verticle-center center">
-	        <div class="logo-container center">
-    	        <a href="/"><img src="" alt="Breast Cancer Pathology"></a>
+			<div class="logo-page-container center">
+                <img src="/pathology/img/logos/logo.png" alt="Breast Cancer Pathology">
         	</div>
         	<div class="form-container">
             	<div class="title">SIGN UP</div>

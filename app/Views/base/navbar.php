@@ -10,7 +10,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3 col-6">
-				<a href="/pathology"><h3>BC Pathology</h3></a>	
+				<a href="/pathology">
+					<div class="main-logo-container">
+						<img src="/pathology/img/logos/logo.png" alt="Breast Cancer Pathology">
+					</div>
+				</a>	
 			</div>
 			<div class="col-lg-9 col-6">
 			
@@ -28,9 +32,16 @@
 						<li>
 							<span><a href="/pathology/about">About Us</a></span>
 						</li>
-						<li>
-							<span><a href="/pathology/users/login">Login</a></span>
-						</li>
+						<?php
+							if (check_logged_in()){
+								echo '<li><span><a href="/pathology/users/logout"><i class="fas fa-running pr-2"></i> Logout</a></span></li>';
+							}else{
+								echo '<li>
+									<span><a href="/pathology/users/login">Login</a></span>
+								</li>';
+							}
+						?>
+						
 					</ul>
 				</nav>
 				<!-- /main-menu -->

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>BCP Dashboard <?php if($data['title']) echo '| ' . $data['title']; ?></title>
 
     <!-- Custom fonts for this template-->
     <link href="/pathology/dashboard/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/pathology/dashboard/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/pathology/dashboard/swal/swal.min.css" rel="stylesheet">
     <link href="/pathology/dashboard/css/custom.admin.css" rel="stylesheet">
 </head>
 <body id="page-top">

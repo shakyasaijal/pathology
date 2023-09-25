@@ -243,3 +243,18 @@
     height: 100%;
     object-fit: scale-down;
   }
+  .logo-page-container{
+	height: 200px;
+  }
+  .logo-page-container img, .main-logo-container img{
+	width: 100%;
+	height: 100%;
+	object-fit: scale-down;
+  }
+  .main-logo-container{
+	height: 100px;
+  }
+
+  #menu{
+	margin-top: 23px;
+  }
