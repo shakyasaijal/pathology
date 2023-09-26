@@ -3,5 +3,5 @@ CREATE TABLE user_token (
     user_id INT,
     reset_token_hash VARCHAR(255) NOT NULL,
     expire_at DATETIME NOT NULL,
-    FOREIGN KEY (id) REFERENCES users(user_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );

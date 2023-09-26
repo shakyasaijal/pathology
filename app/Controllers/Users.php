@@ -353,8 +353,8 @@ class Users extends Controller
             if (empty($data['email'])) {
                 $data['emailError'] = 'Please enter a username.';
             }
-            $user_id = $this->userModel->findUserByEmail($data['email']);
-            if (!$user_id) {
+            $user = $this->userModel->getUserId($data['email']);
+            if (!$user) {
                 $_SESSION['alert_success'] = 'If this email is recorded in our system, then you will receive a password reset email.';
                 header('location: /pathology/users/forget_password');
                 exit();
@@ -365,17 +365,127 @@ class Users extends Controller
 
                 $expiry = date("Y-m-d H:i:s", time() + 60 * 30);
                 
-                $this->userModel->setUserToken($token_hash, $expiry, $user_id);
+                $this->userModel->setUserToken($token_hash, $expiry, $user);
 
                 include_once '../app/utils/sendEmail.php';
                 $subject = 'Breast Cancer Pathology | Reset Password';
-                $email_template = 'password_reset.html';
+                $email_template = 'password_reset.php';
                 $email_to = $data['email'];
-                $user_name = $data['first_name']. ' '. $data['last_name'];
-                sendEmail($subject, $email_template, $email_to, $user_name);
+                $user_name = $user->first_name. ' '. $user->last_name;
+                $send_data = array("token" => $token);
+                $email_sent = sendEmailWithData($subject, $email_template, $email_to, $user_name, $send_data);
+                $_SESSION['alert_success'] = 'If this email is recorded in our system, then you will receive a password reset email.';
+                header('location: /pathology/users/login');
+                exit();
             }
         }else{
             $_SESSION['alert_failed'] = 'Request could not be sent.';
+            header('location: /pathology/users/login');
+            exit();
+        }
+    }
+
+    public function reset_password(){
+        $token = $_GET['token'];
+        $token_hash = hash("sha256", $token);
+        $row = $this->userModel->getHashUser($token_hash);
+        if (!$row){
+            $_SESSION['alert_failed'] = 'Sorry. Token is invalid';
+            header('location: /pathology/users/login');
+            exit();
+        }else{
+            if (strtotime($row->expire_at) <= time()) {
+                $_SESSION['alert_failed'] = 'Sorry. Token has expired. Please request a new one.';
+                header('location: /pathology/users/forget_password');
+                exit();
+            }else{
+                $user = $this->userModel->getUserById($row->user_id);
+                $data = [
+                    'title' => 'Reset Password',
+                    'user' => $user
+                ];
+                $this->view('authentication/reset_password', $data);
+            }
+        }
+    }
+
+    public function complete_password_reset(){
+        /*
+        * -------------------------------------------------------------------------------
+        *   Securing against Header Injection
+        * -------------------------------------------------------------------------------
+        */
+
+        foreach($_POST as $key => $value){
+            $_POST[$key] = _cleaninjections(trim($value));
+        }
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Process form
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+              $data = [
+                'title' => 'Reset Password',
+                'password' => trim($_POST['password']),
+                'confirmPassword' => trim($_POST['confirmPassword']),
+                'user_id' => intVal(trim($_POST['user_id'])),
+                'passwordError' => '',
+                'confirmPasswordError' => '',
+            ];
+
+            $passwordValidation = "/^(.{0,7}|[^a-z]*|[^\d]*)$/i";
+
+            // Validate password on length, numeric values,
+            if(empty($data['password'])){
+                $data['passwordError'] = 'Please enter password.';
+            } elseif(strlen($data['password']) < 8){
+                $data['passwordError'] = 'Password must be at least 8 characters';
+            } elseif (preg_match($passwordValidation, $data['password'])) {
+                $data['passwordError'] = 'Password must be have at least one numeric value.';
+            }
+
+            //Validate confirm password
+            if (empty($data['confirmPassword'])) {
+                $data['confirmPasswordError'] = 'Please confirm password.';
+            } else {
+                if ($data['password'] != $data['confirmPassword']) {
+                    $data['confirmPasswordError'] = 'Passwords do not match, please try again.';
+                }
+            }
+
+            // Make sure that errors are empty
+            if (empty($data['passwordError']) && empty($data['confirmPasswordError'])) {
+
+                // Hash password
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+                $update_password = $this->userModel->updateUserPassword($data);
+                if ($update_password){
+                    $user = $this->userModel->getUserById($data['user_id']);
+                    $_SESSION['alert_success'] = '<strong>Password Changed successfully!</strong> Please login with your credentials.';
+                    if ($user) {
+                        //Redirect to the login page
+                        include_once '../app/utils/sendEmail.php';
+                        $subject = 'Password has been reset!';
+                        $email_template = 'password_has_reset.php';
+                        $email_to = $user->email;
+                        $user_name = $user->first_name. ' '. $user->last_name;
+                        $send_data = array(
+                            'time' => date('F j, Y, g:i A')
+                        );
+                        sendResetDoneEmail($subject, $email_template, $email_to, $user_name, $send_data);
+                        header('location: /pathology/users/login');
+                        exit();
+                    } else {
+                        header('location: /pathology/users/login');
+                        exit();
+                    }
+                }else{
+                    $_SESSION['alert_failed'] = '<strong>Sorry!</strong> Password could not be updated. Please try again later.';
+                    header('location: /pathology/users/forget_password');
+                    exit();
+                }
+            }
         }
     }
 }

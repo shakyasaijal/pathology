@@ -126,13 +126,58 @@ class User extends Core\Model
         }
     }
 
-    public function setUserToken($token_hash, $expiry, $user_id){
-        $this->db->query('INSERT INTO user_token (user_id, reset_token_hash, expiry_at)
+    public function setUserToken($token_hash, $expiry, $user){
+        $this->db->query('INSERT INTO user_token (user_id, reset_token_hash, expire_at)
         VALUES (:user_id, :token_hash, :expiry)');
-
-        $this->db->bind(':user_id', $user_id);
+        echo $user->user_id;
+        echo $token_hash;
+        echo $expiry;
+        $this->db->bind(':user_id', $user->user_id);
         $this->db->bind(':token_hash', $token_hash);
         $this->db->bind(':expiry', $expiry);
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getHashUser($token){
+        //Prepared statement
+        $this->db->query('SELECT * FROM user_token WHERE reset_token_hash = :reset_token_hash');
+
+        //Email param will be binded with the email variable
+        $this->db->bind(':reset_token_hash', $token);
+
+        //Check if email is already registered
+        $this->db->execute();
+        if($this->db->rowCount() > 0) {
+            return $this->db->single();
+        } else {
+            return false;
+        }
+    }
+
+    public function getUserById($id){
+        //Prepared statement
+        $this->db->query('SELECT * FROM users WHERE user_id = :id');
+
+        //Email param will be binded with the email variable
+        $this->db->bind(':id', $id);
+
+        //Check if email is already registered
+        $this->db->execute();
+        if($this->db->rowCount() > 0) {
+            return $this->db->single();
+        } else {
+            return false;
+        }
+    }
+
+    public function updateUserPassword($data){
+        $this->db->query('UPDATE users SET password=:password WHERE user_id=:user_id');
+        $this->db->bind(':password', $data['password']);
+        $this->db->bind(':user_id', $data['user_id']);
         if($this->db->execute()){
             return true;
         }else{

@@ -3,10 +3,13 @@
 
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <title>Breast Cancer Pathology | Sign Up Completed</title>
+    <title>Breast Cancer Pathology | Password Reset</title>
     <meta name="description" content="Reset Password Email Template.">
     <style type="text/css">
         a:hover {text-decoration: underline !important;}
+        .logo{
+            width: 50%;
+        }
     </style>
 </head>
 
@@ -23,8 +26,8 @@
                     </tr>
                     <tr>
                         <td style="text-align:center;">
-                          <a href="https://rakeshmandal.com" title="logo" target="_blank">
-                            <img width="60" src="https://i.ibb.co/hL4XZp2/android-chrome-192x192.png" title="logo" alt="logo">
+                          <a href="/pathology" title="logo" target="_blank">
+                            <img src="https://raw.githubusercontent.com/shakyasaijal/pathology/main/public/img/logos/logo.png" class="logo" title="logo" alt="logo">
                           </a>
                         </td>
                     </tr>
@@ -40,14 +43,15 @@
                                 </tr>
                                 <tr>
                                     <td style="padding:0 35px;">
-                                        <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Thank you for signing up with US !!</h1>
+                                        <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Hi {{user_name}},</h1>
                                         <span
                                             style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
                                         <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                            Please click on the link below to login. Thank you.
+                                            Your password has been reset at <b>{{time}}</b><br/>Please click on the link below to login.
                                         </p>
-                                        <a href="http://localhost:8080/pathology/users/login"
-                                            style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Login Now</a>
+                                        <a style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;" href="http://localhost:8080/pathology/users/login">
+                                            Login Now
+                                        </a>
                                     </td>
                                 </tr>
                                 <tr>

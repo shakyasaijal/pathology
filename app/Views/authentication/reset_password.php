@@ -8,21 +8,34 @@
                 <img src="/pathology/img/logos/logo.png" alt="Breast Cancer Pathology">
         	</div>
         	<div class="form-container">
-            	<div class="title">Forgot your password?</div>
+            	<div class="title">Reset Your Password</div>
             	<div class="forms mt-3">
 					<?php
 						include_once('../app/Views/base/notification.php');
 					?>
-					<form action="/pathology/users/send_password_reset" method="POST">
+					<form action="/pathology/users/complete_password_reset" method="POST">
 						<?php insert_csrf_token(); ?>
 						<div class="form-group">
-							<div class="label">Email Address</div>
-							<input type="text" name="email" class="form-control" autocomplete="off" required autofocus value="saijalshakya@gmail.com">
+							<div class="label">New Password</div>
+							<input type="password" name="password" class="form-control" autocomplete="off" required autofocus>
 							
 							<?php
-								if (isset($data['emailError'])){
+								if (isset($data['passwordError'])){
 									echo '<div class="form-error">'.
-									$data['emailError'].'
+									$data['passwordError'].'
+								</div>';
+								}
+							?>
+							<input type="hidden" name="user_id" value="<?=$data['user']->user_id?>">
+						</div>
+						<div class="form-group">
+							<div class="label">Confirm Password</div>
+							<input type="password" name="confirmPassword" class="form-control" autocomplete="off" required>
+							
+							<?php
+								if (isset($data['confirmPasswordError'])){
+									echo '<div class="form-error">'.
+									$data['confirmPasswordError'].'
 								</div>';
 								}
 							?>
