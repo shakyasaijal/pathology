@@ -129,9 +129,6 @@ class User extends Core\Model
     public function setUserToken($token_hash, $expiry, $user){
         $this->db->query('INSERT INTO user_token (user_id, reset_token_hash, expire_at)
         VALUES (:user_id, :token_hash, :expiry)');
-        echo $user->user_id;
-        echo $token_hash;
-        echo $expiry;
         $this->db->bind(':user_id', $user->user_id);
         $this->db->bind(':token_hash', $token_hash);
         $this->db->bind(':expiry', $expiry);
@@ -183,5 +180,65 @@ class User extends Core\Model
         }else{
             return false;
         }
+    }
+
+    public function saveDoctor($data){
+        $this->db->query('INSERT INTO doctors (full_name, speciality, is_available, email, phone, photo) 
+        VALUES (:full_name, :speciality, :is_available, :email, :phone, :photo)');
+
+        $this->db->bind(':full_name', $data['full_name']);
+        $this->db->bind(':speciality', $data['full_name']);
+        $this->db->bind(':is_available', $data['is_available']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':phone', $data['phone']);
+        $this->db->bind(':photo', $data['photo']);
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function updateDoctor($data){
+        $this->db->query('UPDATE doctors SET full_name=:full_name, speciality=:speciality, is_available=:is_available,
+        email=:email, phone=:phone, photo=:photo WHERE id=:id');
+        $this->db->bind(':full_name', $data['full_name']);
+        $this->db->bind(':speciality', $data['speciality']);
+        $this->db->bind(':is_available', $data['is_available']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':phone', $data['phone']);
+        $this->db->bind(':photo', $data['photo']);
+        $this->db->bind(':id', $data['id']);
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function deleteDoctor($id){
+        //Prepared statement
+        $this->db->query("DELETE FROM doctors WHERE id=:id");
+        $this->db->bind(':id', $id);
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getDoctorById($id){
+         //Prepared statement
+         $this->db->query("SELECT * FROM doctors WHERE id=:id");
+         $this->db->bind(':id', $id);
+         if($this->db->execute()){
+            $row = $this->db->single();
+            if ($row){
+                return $row;
+            }else{
+                return false;
+            }
+         }else{
+             return false;
+         }
     }
 }

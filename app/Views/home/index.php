@@ -9,53 +9,6 @@
 				<a href="/pathology/ai" class="btn btn-lg btn-success">Use Now</a>
 			</div>
 		</div>
-        <div class="bg_color_1">
-			<div class="container margin_120_95">
-				<div class="main_title">
-					<h2>Viral Diseases</h2>
-					<p>Latests News from the desk of Admin</p>
-				</div>
-				<div id="" class="container">
-                    {% for disease in diseases %}
-                        {% if forloop.counter|divisibleby:"3" or forloop.first %}
-                            <div class="row">
-                        {% endif %}
-                            <div class="col-md-4">
-                                <div class="card text-white   wow wobble {% if disease.level == '1' %} bg-danger {% elif disease.level == '2'%} bg-warning {% else %} bg-success {% endif %}  mb-3" style="width: 20rem;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ disease.name }}</h5>
-                                        <p class="card-text">Found: 
-                                            {% if disease.found == 'o' %}
-                                                Outsite Kathmandu
-                                            {% elif disease.found == 'w' %}
-                                                Whole Nepal
-                                            {% else %}
-                                                Inside Kathmandu
-                                            {% endif %}
-                                        </p>
-                                        <p class="card-text">Type: 
-                                         {% if disease.level == '1' %} 
-                                            Danger
-                                         {% elif disease.level == '2'%} 
-                                            Mid-Range 
-                                         {% else %} 
-                                            Normal 
-                                         {% endif %}
-                                        
-                                        </p>
-                                        <a href="{% url 'front:disease' disease.pk %}" class="btn btn-primary btn-sm" style="margin-bottom:5%">Go somewhere</a>
-                                    </div>
-                                </div>
-                            </div>
-                        {% if forloop.counter|divisibleby:"3" or forloop.counter1 %}
-                          </div>
-                        {% endif %}
-                    {% endfor %}
-				</div>
-				<!-- /carousel -->
-			</div>
-			<!-- /container -->
-		</div>
 		<div class="container margin_120_95">
 			<div class="main_title">
 				<h2>Discover the <strong>online</strong> appointment!</h2>
@@ -91,24 +44,23 @@
 			<div class="container margin_120_95">
 				<div class="main_title">
 					<h2>Most Viewed doctors</h2>
-					<p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri.</p>
 				</div>
 				<div id="reccomended" class="owl-carousel owl-theme">
-					{% for doctor in doctors %}
-						<div class="item">
-							<a href="{% url 'front:doctor' doctor.pk %}">
-								<div class="views"><i class="icon-eye-7"></i>140</div>
-								<div class="title">
-									<h4>Dr. {{doctor.name}}<em>
-									{% for type in doctor.type.all %}
-										{{type}}
-										
-									{%endfor%}
-									</em></h4>
-								</div><img src="{{doctor.image.url}}" alt=""/>
-							</a>
-						</div>
-					{% endfor %}
+					<?php
+	                    foreach ($data['doctors'] as $row) {
+							echo '
+								<div class="item">
+									<a href="">
+										<div class="title">
+											<h4>'. $row['full_name'] .'<em>
+											'. $row['speciality'] .'
+											</em></h4>
+										</div><img src="'. $row['photo'] .'" alt=""/>
+									</a>
+								</div>
+							';						
+						}
+					?>
 				</div>
 				<!-- /carousel -->
 			</div>

@@ -258,3 +258,19 @@
   #menu{
 	margin-top: 23px;
   }
+  .consult{
+	border: 2px solid #e74e84;
+    color: #e74e84;
+    cursor: pointer;
+    padding: 5px 20px;
+    transition: all .3s ease-in-out;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+	background-color: transparent;
+    border-radius: 30px;
+  }
+  .consult:hover{
+	background-color: #e74e84;
+    color: #fff!important;
+  }

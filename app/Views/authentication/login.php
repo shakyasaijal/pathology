@@ -30,7 +30,7 @@
 							?>
 						</div>
 						<div class="form-group">
-							<div class="label">Password <span class="forget-password"><a href="/pathology/users/forget_password">Forget Password?</a</span></div>
+							<div class="label">Password <span class="forget-password"><a href="/pathology/users/forget_password">Forget Password?</a></span></div>
 							<input type="password" name="password" class="form-control" autocomplete="off" required>
 							<?php
 								if (isset($data['passwordError'])){

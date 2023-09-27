@@ -9,6 +9,7 @@ class Users extends Controller
 {
     public function __construct() {
         $this->userModel = $this->model('User');
+        $this->faqModel = $this->model('Faq');
     }
 
     public function login() {
@@ -265,14 +266,20 @@ class Users extends Controller
     }
 
     public function profile(){
-        $data = [
-            'title' => 'Profile',
-        ];
-        if(!check_logged_in()){
+        $user = $this->userModel->getUserId($_SESSION['email']);
+        
+        if(!check_logged_in() && !$user){
             header('location: /pathology/users/login');
             exit();
+        }else{
+            $data = [
+                'title' => 'Profile',
+                'user_data' => $user
+            ];
+            $this->view('authentication/profile', $data);
         }
-        $this->view('authentication/profile', $data);
+
+        
     }
 
     public function logout(){
@@ -483,6 +490,74 @@ class Users extends Controller
                 }else{
                     $_SESSION['alert_failed'] = '<strong>Sorry!</strong> Password could not be updated. Please try again later.';
                     header('location: /pathology/users/forget_password');
+                    exit();
+                }
+            }else{
+                $_SESSION['alert_failed'] = '<strong>Sorry!</strong> Password could not be updated. Please try again later.';
+                header('location: /pathology/users/forget_password');
+                exit();
+            }
+        }else{
+            $_SESSION['alert_failed'] = '<strong>Sorry!</strong> Password could not be updated. Please try again later.';
+            header('location: /pathology/users/forget_password');
+            exit();
+        }
+    }
+
+    public function doctors(){
+        $doctors = $this->faqModel->getAllDoctors();
+        $data = [
+            'title' => 'Our Doctors',
+            'doctors' => $doctors
+        ];
+
+        $this->view('home/all_doctors', $data);
+    }
+
+    public function consult(){
+        /*
+        * -------------------------------------------------------------------------------
+        *   Securing against Header Injection
+        * -------------------------------------------------------------------------------
+        */
+
+        foreach($_POST as $key => $value){
+            $_POST[$key] = _cleaninjections(trim($value));
+        }
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if(!check_logged_in()){
+                $_SESSION['alert_failed'] = 'Please login first.';
+                header('location: /pathology/users/login');
+                exit();
+            }else{
+                $user = $this->userModel->getUserById($_SESSION['user_id']);
+                $doctor = $this->userModel->getDoctorById(intVal(trim($_POST['doctor_id'])));
+                if ($user && $doctor){
+                    //Redirect to the login page
+                    include_once '../app/utils/sendEmail.php';
+                    $subject = 'Request for Consultation!';
+                    $email_template = 'consult.html';
+                    $email_to = $doctor->email;
+                    $user_name = $doctor->full_name;
+                    $send_data = array(
+                        'time' => date('F j, Y, g:i A'),
+                        'patient_name' => $user->first_name.' '.$user->last_name,
+                        'patient_email' => $user->email,
+                        'doctor_name' => $user_name
+                    );
+                    if(sendConsultEmail($subject, $email_template, $email_to, $user_name, $send_data)){
+                        $_SESSION['alert_success'] = '<strong>Success!</strong> We have sent an email to the doctor and you. Doctor will contact you soon.';
+                        header('location: /pathology/users/doctors');
+                        exit();
+                    }else{
+                        $_SESSION['alert_failed'] = 'Something went wrong. Please try again later.';
+                        header('location: /pathology/users/doctors');
+                        exit();
+                    }
+                }else{
+                    $_SESSION['alert_failed'] = 'Something went wrong. Please try again later.';
+                    header('location: /pathology/users/doctors');
                     exit();
                 }
             }

@@ -36,4 +36,35 @@ class Faq extends Core\Model
             return false;
         }
     }
+
+    public function addFaq($data){
+        $this->db->query('INSERT INTO faq (question, answer) VALUES (:question, :answer) ');
+        $this->db->bind(':question', $data['question']);
+        $this->db->bind(':answer', $data['answer']);
+        if ($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getAllDoctors(){
+        $this->db->query('SELECT * FROM doctors ORDER BY created_at DESC');
+        return $this->db->row();
+    }
+
+    public function getAllDoctorsF(){
+        $this->db->query('SELECT * FROM doctors ORDER BY RAND() LIMIT 5');
+        return $this->db->row();
+    }
+
+    public function deleteFaq($id){
+        $this->db->query('DELETE FROM faq where id=:id');
+        $this->db->bind(':id', $id);
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

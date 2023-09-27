@@ -24,13 +24,16 @@
 							<span><a href="/pathology">Home</a></span>
 						</li>
 						<li>
-							<span><a href="{% url 'front:list' %}">Doctors</a></span>
+							<span><a href="/pathology/users/doctors">Doctors</a></span>
 						</li>
 						<li>
 							<span><a href="/pathology/contact">Contact</a></span>
 						</li>
 						<li>
 							<span><a href="/pathology/about">About Us</a></span>
+						</li>
+						<li>
+							<span><a href="/pathology/faq">FAQ</a></span>
 						</li>
 						<?php
 							if (check_logged_in()){

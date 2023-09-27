@@ -24,6 +24,13 @@
 
 <!-- Nav Item - Charts -->
 <li class="nav-item">
+    <a class="nav-link" href="/pathology/admin/all_doctors">
+        <i class="fas fa-fw fa-ambulance"></i>
+        <span>Doctors</span></a>
+</li>
+
+<!-- Nav Item - Charts -->
+<li class="nav-item">
     <a class="nav-link" href="/pathology/admin/about">
         <i class="fas fa-fw fa-address-card"></i>
         <span>About</span></a>

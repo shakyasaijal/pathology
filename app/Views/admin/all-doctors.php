@@ -4,7 +4,7 @@
  <!-- DataTales Example -->
  <div class="card shadow mb-4">
 <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Frequently Asked Questions (FAQ) <a href="/pathology/admin/add_faq" class="btn btn-success float-right"><span class="fas fa-plus"> Add New FAQ</span></a></h6>
+    <h6 class="m-0 font-weight-bold text-primary">All Doctors <a href="/pathology/admin/add_doctors" class="btn btn-success float-right"><span class="fas fa-plus"> Add New Doctors</span></a></h6>
     
 </div>
 <div class="card-body">
@@ -13,36 +13,48 @@
             <thead>
                 <tr>
                     <th>S.No.</th>
-                    <th>Question</th>
-                    <th>Answer</th>
-                    <th>Action</th>
+                    <th>Full Name</th>
+                    <th>Photo</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Speciality</th>
+                    <th>Is Available</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
                     <th>S.No.</th>
-                    <th>Question</th>
-                    <th>Answer</th>
-                    <th>Action</th>
+                    <th>Full Name</th>
+                    <th>Photo</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Speciality</th>
+                    <th>Is Available</th>
+                    <th>Actions</th>
                 </tr>
             </tfoot>
             <tbody>
                 <?php
                     $counter = 1;
-                    foreach ($data['faq'] as $row) {
+                    foreach ($data['doctors'] as $row) {
                         echo '<tr>';
                         echo '<td>' . $counter . '</td>';
-                        echo '<td>' . $row['question'] . '</td>';
-                        echo '<td>' . $row['answer'] . '</td>';
+                        echo '<td>' . $row['full_name'] . '</td>';
+                        echo '<td><img src="' . $row['photo'] . '" class="doctors-img" /></td>';
+                        echo '<td>' . $row['email'] . '</td>';
+                        echo '<td>' . $row['phone'] . '</td>';
+                        echo '<td>' . $row['speciality'] . '</td>';
+                        echo '<td>' . $row['is_available'] . '</td>';
                         echo "<td>
-                        <a href='/pathology/admin/faq_edit/$row[id]' title='Edit'>
+                        <a href='/pathology/admin/doctor_edit/$row[id]' title='Edit'>
                             <button class='form-control btn-warning'>
                             <span class='fas fa-pencil-alt'>
                             </span></button>
                         </a>" . "&emsp;".
                         "
-                            <form method='POST' action='/pathology/admin/faq_delete/'>
-                                <input type='hidden' name='faq_id' value='".$row['id']."'/>
+                            <form method='POST' action='/pathology/admin/doctor_delete/'>
+                                <input type='hidden' name='doctor_id' value='".$row['id']."'/>
                                 <button type='submit' class='form-control btn-danger' onClick='confirmDelete(event)'>
                                     <span class='fas fa-trash-alt'></span>
                                 </button>
