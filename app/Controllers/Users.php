@@ -10,17 +10,21 @@ class Users extends Controller
     public function __construct() {
         $this->userModel = $this->model('User');
         $this->faqModel = $this->model('Faq');
+        $this->aboutModel = $this->model('About');
     }
 
     public function login() {
+        $about_data = $this->aboutModel->getAboutData();
         $data = [
             'title' => 'Login',
+            'about_data' => $about_data[0]
         ];
         $this->view('authentication/login', $data);
     }
 
     public function register(){
-        $this->view('authentication/register', ['title' => 'Register']);
+        $about_data = $this->aboutModel->getAboutData();
+        $this->view('authentication/register', ['title' => 'Register', 'about_data' => $about_data[0]]);
     }
 
     public function user_login() {
@@ -87,7 +91,6 @@ class Users extends Controller
                     $data['emailError'] = "The email address you entered isn't connected to an account.";
                 }else{
                     $loggedInUser = $this->userModel->login($data['email'], $data['password']);
-
                     if(gettype($loggedInUser) == 'boolean'){
                         $_SESSION['ERRORS']['passwordError'] = 'Authentication Failed.';
                         $data['passwordError'] = "Authentication Failed.";
@@ -118,7 +121,7 @@ class Users extends Controller
                         }
                         $_SESSION['alert_success'] = 'Login Successful.';
 
-                        if ($data['is_admin'] == 'admin'){
+                        if ($loggedInUser->is_admin == 1){
                             header('location: /pathology/admin/index');
                             exit();
                         }else{
@@ -301,6 +304,7 @@ class Users extends Controller
             }
             session_unset();
             session_destroy();
+            $_SESSION['alert_success'] = 'Logout successful!';
         }
         header('location: /pathology/');
         exit();
@@ -312,8 +316,10 @@ class Users extends Controller
             header('location: /pathology');
             exit();
         }else{
+            $about_data = $this->aboutModel->getAboutData();
             $data = [
                 'title' => 'Forget Password',
+                'about_data' => $about_data[0]
             ];
             $this->view('authentication/forget_password', $data);
         }
@@ -506,9 +512,11 @@ class Users extends Controller
 
     public function doctors(){
         $doctors = $this->faqModel->getAllDoctors();
+        $about_data = $this->aboutModel->getAboutData();
         $data = [
             'title' => 'Our Doctors',
-            'doctors' => $doctors
+            'doctors' => $doctors,
+            'about_data' => $about_data[0]
         ];
 
         $this->view('home/all_doctors', $data);

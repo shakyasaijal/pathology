@@ -11,33 +11,36 @@
 		</div>
 		<div class="container margin_120_95">
 			<div class="main_title">
+					<?php
+						include_once('../app/Views/base/notification.php');						
+					?>
 				<h2>Discover the <strong>online</strong> appointment!</h2>
-				<p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie. Sed ad debet scaevola, ne mel.</p>
+				<p>The Ultimate Booking Solution: Online Appointments at Your Fingertips!</p>
 			</div>
 			<div class="row add_bottom_30">
 				<div class="col-lg-4 ">
 					<div class="box_feat" id="icon_1">
 						<span></span>
 						<h3 class="wow fadeInLeft">Find a Doctor</h3>
-						<p class="wow fadeInLeft">Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie.</p>
+						<p class="wow fadeInLeft">Take control of your well-being by finding the right physician for your needs.</p>
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="box_feat" id="icon_2">
 						<span></span>
 						<h3 class="wow fadeInLeft">View profile</h3>
-						<p class="wow fadeInLeft">Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie.</p>
+						<p class="wow fadeInLeft">Explore their qualifications, experience, and specialties before your visit</p>
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="box_feat" id="icon_3">
 						<h3 class="wow fadeInLeft">Book a visit</h3>
-						<p class="wow fadeInLeft">Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie.</p>
+						<p class="wow fadeInLeft">Schedule your next medical visit with ease and convenience.</p>
 					</div>
 				</div>
 			</div>
 			<!-- /row -->
-			<p class="text-center"><a href="{% url 'front:list' %}" class="btn_1 medium wow bounce">Find Doctor</a></p>
+			<p class="text-center"><a href="/pathology/users/doctors" class="btn_1 medium wow bounce">Find Doctor</a></p>
 		</div>
 		<!-- /container -->
 		<div class="bg_color_1">
@@ -75,7 +78,10 @@
 					<div class="col-md-6">
 						<small>Application</small>
 						<h3>Download <strong>Pathology App</strong> Now!</h3>
-						<p class="lead">Tota omittantur necessitatibus mei ei. Quo paulo perfecto eu, errem percipit ponderum no eos. Has eu mazim sensibus. Ad nonumes dissentiunt qui, ei menandri electram eos. Nam iisque consequuntur cu.</p>
+						<p class="lead">
+
+Download our app on iOS and Android today for a seamless and user-friendly experience. Stay connected, access our services, and enjoy convenient features right at your fingertips. Join our community and discover the ease of managing your needs on the go.
+						</p>
 						<div class="app_buttons wow" data-wow-offset="100">
 							<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 43.1 85.9" style="enable-background:new 0 0 43.1 85.9;" xml:space="preserve">
 							<path stroke-linecap="round" stroke-linejoin="round" class="st0 draw-arrow" d="M11.3,2.5c-5.8,5-8.7,12.7-9,20.3s2,15.1,5.3,22c6.7,14,18,25.8,31.7,33.1" />

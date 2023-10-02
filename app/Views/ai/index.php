@@ -146,7 +146,7 @@
 					});
 
 					$.ajax({
-						url : '//localhost:5000/predict',
+						url : '//localhost:<?=PORT_FOR_PYTHON;?>/predict',
 						type: 'POST',
 						data: data,
 						contentType: 'application/json',

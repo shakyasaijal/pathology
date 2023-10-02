@@ -274,3 +274,7 @@
 	background-color: #e74e84;
     color: #fff!important;
   }
+
+  .strip_list ul{
+	height: 8vh;
+  }

@@ -6,6 +6,9 @@
     <div class="margin_120_95">
         <div class="bg_color_1">
             <div class="container">
+                    <?php
+						include_once('../app/Views/base/notification.php');
+					?>
                 <h2>
                     <?php
                         echo 'Hello '.$data['user_data']->first_name;

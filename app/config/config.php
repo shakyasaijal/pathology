@@ -21,6 +21,7 @@ $email_username = $_ENV['EMAIL_USERNAME'];
 $email_password = $_ENV['EMAIL_PASSWORD'];
 $email_port = $_ENV['EMAIL_PORT'];
 $root_folder = $_ENV['ROOT_FOLDER'];
+$port_for_python = $_ENV['PORT_FOR_PYTHON'];
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,5 @@ define('EMAIL_USERNAME', $email_username);
 define('EMAIL_PASSWORD', $email_password);
 define('EMAIL_PORT', $email_port);
 define('ROOT_FOLDER', $root_folder);
+
+define('PORT_FOR_PYTHON', $port_for_python);

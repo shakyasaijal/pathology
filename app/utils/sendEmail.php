@@ -63,6 +63,8 @@
             $mail->Subject = $subject;
             $html_content = file_get_contents('../app/Views/base/email_templates/'.$email_template);
             $html_content = str_replace('{{token}}', $data['token'], $html_content);
+            $html_content = str_replace('{{server}}', $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'], $html_content);
+
             $mail->Body = $html_content;
             $mail->send();
 

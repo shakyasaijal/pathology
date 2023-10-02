@@ -22,11 +22,11 @@
                                     <span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>('.  ($row['is_available'] == 1 ? 'Available': 'Not Available') .')</small></span>
                                     <ul>
                                         <li>
-                                            <form method="POST" action="/pathology/users/consult">
+                                            <form method="POST" action="'. ($row['is_available'] == 1 ? "/pathology/users/consult" : "javascript:void(0)") .'">
                                                 <input type="hidden" name="doctor_id" value="'. $row['id'] .'"/>
                                                 <button type="submit" class="consult">Consult Now</button>
                                             </form>
-                                        </li>a
+                                        </li>
                                     </ul>
                                 </div>
                             ';
