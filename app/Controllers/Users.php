@@ -111,7 +111,7 @@ class Users extends Controller
                             setcookie(
                                 'rememberme',
                                 $selector.':'.bin2hex($token),
-                                time() + (86400 * 30), // 86400 = 1 day
+                                time() + (86400 * 30), // 86400 = 1 day. For this project we have done for 30 days
                                 '/',
                             );
     
