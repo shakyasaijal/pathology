@@ -9,6 +9,7 @@ Breast Cancer Pathology With AI Prediction Model
 - [Project Setup](#running-it-locally)
 - [Clone Database](#clone-database)
 - [Credentials](#credentials)
+- [Artificial Intelligence](#artificial-intelligence)
 
 # Pre-requisites
 
@@ -115,4 +116,10 @@ user@gmail.com
 ** Password
 
 user@123
+```
+
+# Artificial Intelligence
+
+```
+All AI files are located in public/machine-learning
 ```
